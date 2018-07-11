@@ -3,6 +3,25 @@ Deploy Web Applications
 
 You will create a playbook to deploy applications to previously provisioned webservers.
 
+#. Edit ansible inventory file.
+
+   - Type ``nano inventory/hosts``
+   - Type the following into the ``inventory/hosts`` file
+
+   .. code::
+
+     [bigips]
+     10.1.1.245
+
+     [appservers]
+     10.1.20.17 ansible_user=root
+     10.1.20.20 ansible_user=root
+     #10.1.1.252 ansible_user=root
+
+     [webservers]
+     10.1.20.15 ansible_user=root
+     10.1.20.16 ansible_user=root
+
 #. Create a playbook ``newapp.yaml``.
 
    - Type ``nano playbooks/newapp.yaml``

@@ -238,6 +238,25 @@
 <h1>2.1.1. Deploy Web Applications<a class="headerlink" href="#deploy-web-applications" title="Permalink to this headline">¶</a></h1>
 <p>You will create a playbook to deploy applications to previously provisioned webservers.</p>
 <ol class="arabic">
+<li><p class="first">Edit ansible inventory file.</p>
+<ul class="simple">
+<li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">inventory/hosts</span></code></li>
+<li>Type the following into the <code class="docutils literal"><span class="pre">inventory/hosts</span></code> file</li>
+</ul>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">bigips</span><span class="p">]</span>
+<span class="mf">10.1</span><span class="o">.</span><span class="mf">1.245</span>
+
+<span class="p">[</span><span class="n">appservers</span><span class="p">]</span>
+<span class="mf">10.1</span><span class="o">.</span><span class="mf">20.17</span> <span class="n">ansible_user</span><span class="o">=</span><span class="n">root</span>
+<span class="mf">10.1</span><span class="o">.</span><span class="mf">20.20</span> <span class="n">ansible_user</span><span class="o">=</span><span class="n">root</span>
+<span class="c1">#10.1.1.252 ansible_user=root</span>
+
+<span class="p">[</span><span class="n">webservers</span><span class="p">]</span>
+<span class="mf">10.1</span><span class="o">.</span><span class="mf">20.15</span> <span class="n">ansible_user</span><span class="o">=</span><span class="n">root</span>
+<span class="mf">10.1</span><span class="o">.</span><span class="mf">20.16</span> <span class="n">ansible_user</span><span class="o">=</span><span class="n">root</span>
+</pre></div>
+</div>
+</li>
 <li><p class="first">Create a playbook <code class="docutils literal"><span class="pre">newapp.yaml</span></code>.</p>
 <ul class="simple">
 <li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">playbooks/newapp.yaml</span></code></li>
