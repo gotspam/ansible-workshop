@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.2.4. Create a Virtual Server &#8212; F5 Ansible Workshop  documentation</title>
+    <title>2.2.4. Simulate Blue Green Updates &#8212; F5 Ansible Workshop  documentation</title>
     
     <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -28,8 +28,8 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.2.5. Creating a pool on BIG-IP" href="lab5.html" />
-    <link rel="prev" title="2.2.3. Sending arguments to your playbook" href="lab3.html" />
+    <link rel="next" title="2.3. Lab 3 - App Deployment Workflows" href="../module3/module3.html" />
+    <link rel="prev" title="2.2.3. Modify Pool Member State" href="lab3.html" />
 <!--
 # Copyright 2017 F5 Networks
 #
@@ -215,18 +215,17 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../class1.html">2. Class - F5 Ansible Workshop</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../module1/module1.html">2.1. Lab 1 – Speed of Human deployment</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="module2.html">2.2. Lab 2 - Speed of Automation and Basic BIG-IP Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module3/module2.html">2.3. Module – Working with Ansible variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../module4/module4.html">2.4. Module – Putting all together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../module3/module3.html">2.3. Lab 3 - App Deployment Workflows</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="lab3.html"
-                        title="previous chapter">2.2.3. Sending arguments to your playbook</a></p>
+                        title="previous chapter">2.2.3. Modify Pool Member State</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="lab5.html"
-                        title="next chapter">2.2.5. Creating a pool on BIG-IP</a></p>
+  <p class="topless"><a href="../module3/module3.html"
+                        title="next chapter">2.3. Lab 3 - App Deployment Workflows</a></p>
         
       </div>
       <div class="col-md-offset-3 col-sm-offset-3 main">
@@ -235,49 +234,60 @@
           <span class="right"><a href="../../genindex.html">Index</a></span>
         </h4>
         
-  <div class="section" id="create-a-virtual-server">
-<h1>2.2.4. Create a Virtual Server<a class="headerlink" href="#create-a-virtual-server" title="Permalink to this headline">¶</a></h1>
-<p><strong>Create a virtual server and assign pool</strong></p>
-<p>You need to assign newly created nodes to a pool.  Use the <code class="docutils literal"><span class="pre">bigip_virtual_server</span></code>
-module.</p>
+  <div class="section" id="simulate-blue-green-updates">
+<h1>2.2.4. Simulate Blue Green Updates<a class="headerlink" href="#simulate-blue-green-updates" title="Permalink to this headline">¶</a></h1>
+<p>This demonstrates a very simple example to provide continuous updates.</p>
 <ol class="arabic">
-<li><p class="first">Create a playbook <code class="docutils literal"><span class="pre">vs.yaml</span></code>.</p>
-<ul>
-<li><p class="first">Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">playbooks/vs.yaml</span></code></p>
-</li>
-<li><p class="first">Type the following into the <code class="docutils literal"><span class="pre">playbooks/vs.yaml</span></code> file.</p>
-<a class="reference internal image-reference" href="../../_images/image021.png"><img alt="../../_images/image021.png" src="../../_images/image021.png" style="height: 500px;" /></a>
-</li>
-<li><p class="first">Ctrl x to save file.</p>
-</li>
-</ul>
-</li>
-<li><p class="first">Run this playbook.</p>
+<li><p class="first">Run this playbook to offline a pool member <code class="docutils literal"><span class="pre">10.1.20.17</span></code>.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/vs.yaml</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/offline.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">pool=&quot;hack11_pl&quot;</span> <span class="pre">-e</span> <span class="pre">pmhost=&quot;10.1.20.17&quot;</span> <span class="pre">-e</span> <span class="pre">pmport=&quot;80&quot;</span></code></li>
 </ul>
-<p>If successful, you should see similar results</p>
-<a class="reference internal image-reference" href="../../_images/image022.png"><img alt="../../_images/image022.png" src="../../_images/image022.png" style="height: 200px;" /></a>
 </li>
-<li><p class="first">Verify BIG-IP results.</p>
+<li><p class="first">Verify if pool member 10.1.20.17 is <code class="docutils literal"><span class="pre">forced</span> <span class="pre">offline</span></code></p>
 <ul class="simple">
-<li>Select <strong>Local Traffic -&gt; Virtual Servers -&gt; Virtual Server List</strong></li>
+<li>Select <strong>Local Traffic -&gt; Pools -&gt; Pool List -&gt; hack11_pl -&gt; Members</strong></li>
 </ul>
-<a class="reference internal image-reference" href="../../_images/image023.png"><img alt="../../_images/image023.png" src="../../_images/image023.png" style="height: 200px;" /></a>
+<a class="reference internal image-reference" href="../../_images/image035.png"><img alt="../../_images/image035.png" src="../../_images/image035.png" style="height: 200px;" /></a>
+</li>
+<li><p class="first">Run this playbook to update app on <code class="docutils literal"><span class="pre">10.1.20.17</span></code>.</p>
 <ul class="simple">
-<li>Open browser to <code class="docutils literal"><span class="pre">http://10.1.10.10</span></code>.</li>
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/blue.yaml</span> <span class="pre">--tags</span> <span class="pre">17blue</span></code></li>
 </ul>
+</li>
+<li><p class="first">Run this playbook enable pool member <code class="docutils literal"><span class="pre">10.1.20.17</span></code>.</p>
+<ul class="simple">
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/enable.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">pool=&quot;hack11_pl&quot;</span> <span class="pre">-e</span> <span class="pre">pmhost=&quot;10.1.20.17&quot;</span> <span class="pre">-e</span> <span class="pre">pmport=&quot;80&quot;</span></code></li>
+</ul>
+</li>
+<li><p class="first">Verify if pool member 10.1.20.17 is <code class="docutils literal"><span class="pre">enabled</span></code></p>
+<ul class="simple">
+<li>Select <strong>Local Traffic -&gt; Pools -&gt; Pool List -&gt; hack11_pl -&gt; Members</strong></li>
+</ul>
+</li>
+<li><p class="first">Run this playbook to offline a pool member <code class="docutils literal"><span class="pre">10.1.20.20</span></code>.</p>
+<ul class="simple">
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/offline.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">pool=&quot;hack11_pl&quot;</span> <span class="pre">-e</span> <span class="pre">pmhost=&quot;10.1.20.20&quot;</span> <span class="pre">-e</span> <span class="pre">pmport=&quot;80&quot;</span></code></li>
+</ul>
+</li>
+<li><p class="first">Verify if pool member 10.1.20.20 is <code class="docutils literal"><span class="pre">forced</span> <span class="pre">offline</span></code></p>
+<ul class="simple">
+<li>Select <strong>Local Traffic -&gt; Pools -&gt; Pool List -&gt; hack11_pl -&gt; Members</strong></li>
+</ul>
+</li>
+<li><p class="first">Run this playbook to update app on <code class="docutils literal"><span class="pre">10.1.20.20</span></code>.</p>
+<ul class="simple">
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/blue.yaml</span> <span class="pre">--tags</span> <span class="pre">20blue</span></code></li>
+</ul>
+</li>
+<li><p class="first">Run this playbook enable pool member <code class="docutils literal"><span class="pre">10.1.20.20</span></code>.</p>
+<ul class="simple">
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/enable.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">pool=&quot;hack11_pl&quot;</span> <span class="pre">-e</span> <span class="pre">pmhost=&quot;10.1.20.20&quot;</span> <span class="pre">-e</span> <span class="pre">pmport=&quot;80&quot;</span></code></li>
+</ul>
+</li>
+<li><p class="first">Browse to <code class="docutils literal"><span class="pre">http://10.1.10.11</span></code> to test Application</p>
+<a class="reference internal image-reference" href="../../_images/image099.png"><img alt="../../_images/image099.png" src="../../_images/image099.png" style="height: 300px;" /></a>
 </li>
 </ol>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The <code class="docutils literal"><span class="pre">bigip_virtual_server</span></code> module can configure a number of attributes for
-virtual server. At a minimum, the <code class="docutils literal"><span class="pre">name</span></code> is required.</p>
-<p>This module is idempotent. Therefore, you can run it over and over again
-and so-long as no settings have been changed, this module will report no
-changes.</p>
-<p class="last">The module has several more options, all of which can be seen at <a class="reference external" href="https://docs.ansible.com/ansible/latest/modules/bigip_virtual_server_module.html">this link</a>.</p>
-</div>
 </div>
 
 
@@ -285,10 +295,10 @@ changes.</p>
 		     <div class="row next-prev-btn-row">
            <div class="col-lg-12">
            
-		        <a href="lab3.html" title="2.2.3. Sending arguments to your playbook" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
+		        <a href="lab3.html" title="2.2.3. Modify Pool Member State" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
            
            
-              <a href="lab5.html" title="2.2.5. Creating a pool on BIG-IP" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+              <a href="../module3/module3.html" title="2.3. Lab 3 - App Deployment Workflows" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
            
 		     </div>
          </div>

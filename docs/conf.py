@@ -8,7 +8,7 @@
 classname = "F5 Ansible Workshop"
 
 # OPTIONAL: The URL to the GitHub Repository for this class
-github_repo = "https://github.com/gotspam/f5-ansible-workshop"
+github_repo = "https://github.com/gotspam/ansible-workshop"
 
 # OPTIONAL: Google Analytics
 # googleanalytics_id = 'UA-85156643-4'

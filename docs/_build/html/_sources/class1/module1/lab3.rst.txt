@@ -1,21 +1,17 @@
-Configure BIG-IP App Services
-=============================
+Configure BIG-IP App Services (iApp)
+====================================
 
-The application has been deployed and DevOps team has entered a ticket for NetOps
-to configure App Services so applications can be accessible from external users.
-This often dependent of available change windows and can create huge delays.
-
-F5 BIG-IP has create iApp templates to ease deployment process.
+F5 BIG-IP has created iApp templates to ease deployment process.
 
 #. Login to BIG-IP gui and configure services.
 
    - Select **iApps -> Application Services -> Applications** then click **create**
-   - Type ``hello10`` for **Name**
+   - Type ``hello15`` for **Name**
    - Select ``f5.http`` **Template**
    - Select ``Advanced - Configure advanced options``
 
      .. image:: /_static/image012.png
-         :height: 140px
+         :height: 300px
 
    - In the **Network Section** select ``Yes, use new profiles``.
 
@@ -41,7 +37,7 @@ F5 BIG-IP has create iApp templates to ease deployment process.
 
 #. Verify results by browsing to websites.
 
-   - Open browser to ``http://10.1.10.10``.
+   - Open browser to ``http://10.1.10.15``.
 
    .. NOTE::
 

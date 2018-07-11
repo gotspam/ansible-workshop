@@ -66,7 +66,7 @@ You will create a playbook to deploy applications to previously provisioned webs
 
 #. Verify results by browsing to websites.
 
-   - Open browser to ``http2://10.1.10.15`` and ``http://10.1.20.16``.
+   - Type ``curl http://10.1.10.15`` and ``curl http://10.1.20.16``.
 
 
    .. NOTE::

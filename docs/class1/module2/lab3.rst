@@ -48,7 +48,7 @@ Use the ``-e``, or ``--extra-vars`` argument of ``ansible-playbook``
    - Select **Local Traffic -> Pools -> Pool List -> hack11_pl -> Members**
 
    .. image:: /_static/image035.png
-         :height: 140px
+         :height: 200px
 
 **Create pool member enable playbook**
 

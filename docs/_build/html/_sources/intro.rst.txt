@@ -51,6 +51,7 @@ Connect to lab
         - **External:** 10.1.10.150
         - **Internal:** 10.1.20.150
       - - ``root``/``password``
+        - ``admin``/``password``
     * - BIG-IP01
       - - **Management:** 10.1.1.245
         - **External:** 10.1.10.245

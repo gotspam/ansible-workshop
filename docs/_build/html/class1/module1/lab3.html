@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.1.3. Configure BIG-IP App Services &#8212; F5 Ansible Workshop  documentation</title>
+    <title>2.1.3. Configure BIG-IP App Services (iApp) &#8212; F5 Ansible Workshop  documentation</title>
     
     <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -234,23 +234,20 @@
           <span class="right"><a href="../../genindex.html">Index</a></span>
         </h4>
         
-  <div class="section" id="configure-big-ip-app-services">
-<h1>2.1.3. Configure BIG-IP App Services<a class="headerlink" href="#configure-big-ip-app-services" title="Permalink to this headline">¶</a></h1>
-<p>The application has been deployed and DevOps team has entered a ticket for NetOps
-to configure App Services so applications can be accessible from external users.
-This often dependent of available change windows and can create huge delays.</p>
-<p>F5 BIG-IP has create iApp templates to ease deployment process.</p>
+  <div class="section" id="configure-big-ip-app-services-iapp">
+<h1>2.1.3. Configure BIG-IP App Services (iApp)<a class="headerlink" href="#configure-big-ip-app-services-iapp" title="Permalink to this headline">¶</a></h1>
+<p>F5 BIG-IP has created iApp templates to ease deployment process.</p>
 <ol class="arabic">
 <li><p class="first">Login to BIG-IP gui and configure services.</p>
 <ul>
 <li><p class="first">Select <strong>iApps -&gt; Application Services -&gt; Applications</strong> then click <strong>create</strong></p>
 </li>
-<li><p class="first">Type <code class="docutils literal"><span class="pre">hello10</span></code> for <strong>Name</strong></p>
+<li><p class="first">Type <code class="docutils literal"><span class="pre">hello15</span></code> for <strong>Name</strong></p>
 </li>
 <li><p class="first">Select <code class="docutils literal"><span class="pre">f5.http</span></code> <strong>Template</strong></p>
 </li>
 <li><p class="first">Select <code class="docutils literal"><span class="pre">Advanced</span> <span class="pre">-</span> <span class="pre">Configure</span> <span class="pre">advanced</span> <span class="pre">options</span></code></p>
-<a class="reference internal image-reference" href="../../_images/image012.png"><img alt="../../_images/image012.png" src="../../_images/image012.png" style="height: 140px;" /></a>
+<a class="reference internal image-reference" href="../../_images/image012.png"><img alt="../../_images/image012.png" src="../../_images/image012.png" style="height: 300px;" /></a>
 </li>
 <li><p class="first">In the <strong>Network Section</strong> select <code class="docutils literal"><span class="pre">Yes,</span> <span class="pre">use</span> <span class="pre">new</span> <span class="pre">profiles</span></code>.</p>
 <a class="reference internal image-reference" href="../../_images/image013.png"><img alt="../../_images/image013.png" src="../../_images/image013.png" style="height: 140px;" /></a>
@@ -269,7 +266,7 @@ This often dependent of available change windows and can create huge delays.</p>
 </li>
 <li><p class="first">Verify results by browsing to websites.</p>
 <ul class="simple">
-<li>Open browser to <code class="docutils literal"><span class="pre">http://10.1.10.10</span></code>.</li>
+<li>Open browser to <code class="docutils literal"><span class="pre">http://10.1.10.15</span></code>.</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
