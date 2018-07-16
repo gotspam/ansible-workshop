@@ -258,20 +258,6 @@
   <span class="n">environment</span><span class="p">:</span> <span class="s2">&quot;{{ bigip_env }}&quot;</span>
 
   <span class="n">tasks</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Adjust</span> <span class="n">virtual</span> <span class="n">server</span>
-      <span class="n">bigip_virtual_server</span><span class="p">:</span>
-        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ vsname }}&quot;</span>
-        <span class="n">destination</span><span class="p">:</span> <span class="s2">&quot;{{ vsip }}&quot;</span>
-        <span class="n">port</span><span class="p">:</span> <span class="s2">&quot;{{ vsport }}&quot;</span>
-        <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Web App&quot;</span>
-        <span class="n">snat</span><span class="p">:</span> <span class="s2">&quot;Automap&quot;</span>
-        <span class="n">all_profiles</span><span class="p">:</span>
-          <span class="o">-</span> <span class="s2">&quot;tcp-lan-optimized&quot;</span>
-          <span class="o">-</span> <span class="s2">&quot;clientssl&quot;</span>
-          <span class="o">-</span> <span class="s2">&quot;http&quot;</span>
-          <span class="o">-</span> <span class="s2">&quot;analytics&quot;</span>
-        <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
-
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Adjust</span> <span class="n">a</span> <span class="n">VS</span>
       <span class="n">bigip_virtual_server</span><span class="p">:</span>
         <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ vs_name }}&quot;</span>
@@ -327,6 +313,13 @@
 <ul class="simple">
 <li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">playbooks/hack11.yaml</span></code></li>
 </ul>
+<p>You will be prompted for vault <code class="docutils literal"><span class="pre">password</span></code> before executing the playbook.
+If successful, you should see config for virtual servers, pools and nodes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Type <code class="docutils literal"><span class="pre">ansible-vault</span> <span class="pre">view</span> <span class="pre">creds.yaml</span></code> to modify the vault file.
+Type <code class="docutils literal"><span class="pre">ansible-vault</span> <span class="pre">edit</span> <span class="pre">creds.yaml</span></code> to modify the vault file.</p>
+</div>
 </li>
 <li><p class="first">Verify results in BIG-IP GUI.</p>
 <ul class="simple">

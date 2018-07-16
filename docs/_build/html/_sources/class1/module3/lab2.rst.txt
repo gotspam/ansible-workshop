@@ -53,7 +53,7 @@ You will create a playbook to deploy VS, Pools and associated Members using iApp
 
 #. Run this playbook.
 
-   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e service_name="app4" -e service_ip="10.1.10.40" -e service_group="appservers"``
+   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e vs_name="app4" -e vs_ip="10.1.10.110" -e vs_group="appservers"``
 
 
    .. hint::
@@ -64,11 +64,11 @@ You will create a playbook to deploy VS, Pools and associated Members using iApp
 
    .. hint::
 
-      You should see app4 deployed with 1 pool member.  App should be accessible on https://10.1.10.40.
+      You should see app4 iapp services deployed.  App should be accessible on https://10.1.10.100.
 
 
 #. Run this playbook to teardown.
 
-   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e service_name="app4" -e service_ip="10.1.10.40" -e service_group="appservers" -e state="absent"``
+   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e vs_name="app4" -e vs_ip="10.1.10.40" -e vs_group="appservers" -e state="absent"``
 
 #. Verify that app4 iapp should be deleted in BIG-IP GUI.

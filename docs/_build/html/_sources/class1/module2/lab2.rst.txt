@@ -26,20 +26,6 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
       environment: "{{ bigip_env }}"
 
       tasks:
-        - name: Adjust virtual server
-          bigip_virtual_server:
-            name: "{{ vsname }}"
-            destination: "{{ vsip }}"
-            port: "{{ vsport }}"
-            description: "Web App"
-            snat: "Automap"
-            all_profiles:
-              - "tcp-lan-optimized"
-              - "clientssl"
-              - "http"
-              - "analytics"
-            state: "{{ state }}"
-
         - name: Adjust a VS
           bigip_virtual_server:
             name: "{{ vs_name }}"
@@ -91,6 +77,15 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 #. Run this playbook.
 
    - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/hack11.yaml``
+
+   You will be prompted for vault ``password`` before executing the playbook.
+   If successful, you should see config for virtual servers, pools and nodes.
+
+   .. NOTE::
+
+    Type ``ansible-vault view creds.yaml`` to modify the vault file.
+    Type ``ansible-vault edit creds.yaml`` to modify the vault file.
+
 
 #. Verify results in BIG-IP GUI.
 

@@ -3,9 +3,15 @@ Deploy Web Applications
 
 You will create a playbook to deploy applications to previously provisioned webservers.
 
-#. Edit ansible inventory file.
+**Examine ansible inventory file**
 
-   - Type ``nano inventory/hosts``
+Ansible works against multiple systems in your infrastructure at the same time.
+It does this by selecting portions of systems listed in Ansible’s inventory.
+For this lab, the ansible inventory file is ``inventory/hosts``.
+
+#. Edit ansible inventory file and ensure it has the entries listed below.
+
+   - Type ``nano inventory/hosts`` and modify if necessary
    - Type the following into the ``inventory/hosts`` file
 
    .. code::
@@ -21,6 +27,10 @@ You will create a playbook to deploy applications to previously provisioned webs
      [webservers]
      10.1.20.15 ansible_user=root
      10.1.20.16 ansible_user=root
+
+   - Type ``ctrl x`` then press ``enter`` save file.
+
+**Create Playbook to deploy web application**
 
 #. Create a playbook ``newapp.yaml``.
 
@@ -38,41 +48,19 @@ You will create a playbook to deploy applications to previously provisioned webs
          valid_certs: no
 
        tasks:
-         - name: delete folder5
-           file:
-             path: /var/www/server/5/
-             state: absent
-           tags: serv5
-
-         - name: create folder5
-           file:
-             path: /var/www/server/5/
-             state: directory
-           tags: serv5
-
          - name: deploy to server5
            copy:
-             src: ../files/f5-hello-world-develop/hw/
-             dest: /var/www/server/5/
+             src: ../files/f5-hello-world-develop/customizations/blue.css
+             dest: /var/www/server/5/css/custom.css
            tags: serv5
-
-         - name: delete folder6
-           file:
-             path: /var/www/server/6/
-             state: absent
-           tags: serv6
-
-         - name: create folder6
-           file:
-             path: /var/www/server/6/
-             state: directory
-           tags: serv6
 
          - name: deploy to server6
            copy:
-             src: ../files/f5-hello-world-develop/hw/
-             dest: /var/www/server/6/
+             src: ../files/f5-hello-world-develop/customizations/green.css
+             dest: /var/www/server/6/css/custom.css
            tags: serv6
+
+   - Type ``ctrl x`` and save file.
 
 #. Run this playbook.
 
@@ -85,7 +73,7 @@ You will create a playbook to deploy applications to previously provisioned webs
 
 #. Verify results by browsing to websites.
 
-   - Type ``curl http://10.1.10.15`` and ``curl http://10.1.20.16``.
+   - Type ``curl http://10.1.20.15`` and ``curl http://10.1.20.16``.
 
 
    .. NOTE::

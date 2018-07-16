@@ -30,9 +30,14 @@ Connect to lab
 
 **Connecting to ansible host.**
 
-#. Launch putty and connect to ansible.
+#. SSH to ansible host
 
-#. Change directory to ``f5-ansible-workshop``.
+   - ``Windows Users``: Launch putty and connect to ansible.
+   - ``Mac Users``: Open Terminal Emulator and type ``ssh root@10.1.1.150``.
+
+#. Change directory to access lab directory folder.
+
+   - type ``cd f5-ansible-workshop``
 
 .. list-table::
     :widths: 20 40 40
