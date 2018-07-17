@@ -37,7 +37,6 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
             snat: "Automap"
             all_profiles:
               - "tcp-lan-optimized"
-              - "clientssl"
               - "http"
               - "analytics"
             state: "{{ state }}"
@@ -88,7 +87,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
    .. hint::
 
-     You should see www12 deployed with 2 pool members.  App should be accessible on https://10.1.10.12.
+     You should see www12 deployed with 2 pool members.  App should be accessible on http://10.1.10.12.
 
 #. Run this playbook to teardown app.
 

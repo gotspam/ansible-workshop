@@ -32,7 +32,7 @@ Use the ``-e``, or ``--extra-vars`` argument of ``ansible-playbook``
       tasks:
         - name: Modify pool member state
           bigip_pool_member:
-            state: {{ state }}
+            state: "{{ state }}"
             session_state: "disabled"
             monitor_state: "disabled"
             host: "{{ pmhost }}"
@@ -78,7 +78,7 @@ Use the ``-e``, or ``--extra-vars`` argument of ``ansible-playbook``
       tasks:
         - name: Modify pool member state
           bigip_pool_member:
-            state: {{ state }}
+            state: "{{ state }}"
             session_state: "enabled"
             monitor_state: "enabled"
             host: "{{ pmhost }}"

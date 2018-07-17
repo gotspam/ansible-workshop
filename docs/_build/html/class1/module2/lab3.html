@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.3. Lab 3 - App Deployment Workflows" href="../module3/module3.html" />
+    <link rel="next" title="2.2.4. Simulate Blue Green Updates" href="lab4.html" />
     <link rel="prev" title="2.2.2. Deploy BIG-IP App Services" href="lab2.html" />
 <!--
 # Copyright 2017 F5 Networks
@@ -224,8 +224,8 @@
   <p class="topless"><a href="lab2.html"
                         title="previous chapter">2.2.2. Deploy BIG-IP App Services</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../module3/module3.html"
-                        title="next chapter">2.3. Lab 3 - App Deployment Workflows</a></p>
+  <p class="topless"><a href="lab4.html"
+                        title="next chapter">2.2.4. Simulate Blue Green Updates</a></p>
         
       </div>
       <div class="col-md-offset-3 col-sm-offset-3 main">
@@ -264,7 +264,7 @@ Use the <code class="docutils literal"><span class="pre">-e</span></code>, or <c
   <span class="n">tasks</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Modify</span> <span class="n">pool</span> <span class="n">member</span> <span class="n">state</span>
       <span class="n">bigip_pool_member</span><span class="p">:</span>
-        <span class="n">state</span><span class="p">:</span> <span class="p">{{</span> <span class="n">state</span> <span class="p">}}</span>
+        <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
         <span class="n">session_state</span><span class="p">:</span> <span class="s2">&quot;disabled&quot;</span>
         <span class="n">monitor_state</span><span class="p">:</span> <span class="s2">&quot;disabled&quot;</span>
         <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost }}&quot;</span>
@@ -310,7 +310,7 @@ Use the <code class="docutils literal"><span class="pre">-e</span></code>, or <c
   <span class="n">tasks</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Modify</span> <span class="n">pool</span> <span class="n">member</span> <span class="n">state</span>
       <span class="n">bigip_pool_member</span><span class="p">:</span>
-        <span class="n">state</span><span class="p">:</span> <span class="p">{{</span> <span class="n">state</span> <span class="p">}}</span>
+        <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
         <span class="n">session_state</span><span class="p">:</span> <span class="s2">&quot;enabled&quot;</span>
         <span class="n">monitor_state</span><span class="p">:</span> <span class="s2">&quot;enabled&quot;</span>
         <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost }}&quot;</span>
@@ -340,7 +340,7 @@ Use the <code class="docutils literal"><span class="pre">-e</span></code>, or <c
 		        <a href="lab2.html" title="2.2.2. Deploy BIG-IP App Services" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
            
            
-              <a href="../module3/module3.html" title="2.3. Lab 3 - App Deployment Workflows" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+              <a href="lab4.html" title="2.2.4. Simulate Blue Green Updates" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
            
 		     </div>
          </div>
