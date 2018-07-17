@@ -13,7 +13,7 @@ This demonstrates a very simple example to provide continuous updates.
 
    .. image:: /_static/image035.png
          :height: 200px
-         
+
 #. Run this playbook to update app on ``10.1.20.17``.
 
    - Type ``ansible-playbook playbooks/blue.yaml --tags 17blue``
@@ -42,7 +42,7 @@ This demonstrates a very simple example to provide continuous updates.
 
    - Type ``ansible-playbook playbooks/enable.yaml -e @creds.yaml --ask-vault-pass -e pool="hack11_pl" -e pmhost="10.1.20.20" -e pmport="80"``
 
-#. Browse to ``http://10.1.10.11`` to test Application
+#. Browse to ``https://10.1.10.11`` to test Application
 
    .. image:: /_static/image099.png
           :height: 300px

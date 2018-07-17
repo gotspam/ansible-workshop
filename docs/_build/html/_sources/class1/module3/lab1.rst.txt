@@ -1,5 +1,5 @@
-Create VS, Pool and Members using playbook variables
-====================================================
+Create VS, Pool and Members using seed file
+===========================================
 
 You will create a consolidated playbook to deploy VS, Pools and associated Members.
 
@@ -18,25 +18,21 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
       hosts: bigips
       gather_facts: False
       connection: local
+      vars_files:
+        - ../vars/{{ seed }}
 
       vars:
-        vsname: "app2"
-        vsip: "10.1.10.100"
-        vsport: "443"
-        plname: "app2_pl"
-        pmport: "80"
-        pmhost1: "10.1.20.11"
-        pmhost2: "10.1.20.12"
         state: "present"
+        seed: "appseedinfo.yaml"
 
       environment: "{{ bigip_env }}"
 
       tasks:
         - name: Adjust virtual server
           bigip_virtual_server:
-            name: "{{ vsname }}"
-            destination: "{{ vsip }}"
-            port: "{{ vsport }}"
+            name: "{{ vs_name }}"
+            destination: "{{ vs_ip }}"
+            port: "{{ vs_port }}"
             description: "Web App"
             snat: "Automap"
             all_profiles:
@@ -48,37 +44,37 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
         - name: Adjust a pool
           bigip_pool:
-            name: "{{ plname }}"
+            name: "{{ pl_name }}"
             monitors: "/Common/http"
             monitor_type: "and_list"
             slow_ramp_time: "120"
-            lb_method: "ratio-member"
+            lb_method: "{{ pl_lb }}"
             state: "{{ state }}"
 
         - name: Add nodes
           bigip_node:
-            name: "{{ pmhost1 }}"
-            host: "{{ pmhost1}}"
+            name: "{{ item.name }}"
+            host: "{{ item.host }}"
             state: "{{ state }}"
           loop:
-            - { name: "{{ pmhost1 }}", host: "{{ pmhost1 }}" }
-            - { name: "{{ pmhost2 }}", host: "{{ pmhost2 }}" }
+            - { name: "{{ nd_ip1 }}", host: "{{ nd_ip1 }}" }
+            - { name: "{{ nd_ip2 }}", host: "{{ nd_ip2 }}" }
 
         - name: Add nodes to pool
           bigip_pool_member:
             host: "{{ item.host }}"
-            port: "{{ pmport }}"
-            pool: "{{ plname }}"
+            port: "{{ nd_port }}"
+            pool: "{{ pl_name }}"
             state: "{{ state }}"
           loop:
-            - { host: "{{ pmhost1 }}" }
-            - { host: "{{ pmhost2 }}" }
+            - { host: "{{ nd_ip1 }}" }
+            - { host: "{{ nd_ip2 }}" }
           when: state == "present"
 
         - name: Update a VS
           bigip_virtual_server:
-            name: "{{ vsname }}"
-            pool: "{{ plname }}"
+            name: "{{ vs_name }}"
+            pool: "{{ pl_name }}"
             state: "{{ state }}"
           when: state == "present"
 
@@ -92,10 +88,10 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
    .. hint::
 
-     You should see app2 deployed with 2 pool members.  App should be accessible on https://10.1.10.100.
+     You should see www12 deployed with 2 pool members.  App should be accessible on https://10.1.10.12.
 
 #. Run this playbook to teardown app.
 
    - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/app.yaml -e state="absent"``
 
-#. Verify that app2, pool and nodes should be deleted in BIG-IP GUI.
+#. Verify that www12, pool and nodes should be deleted in BIG-IP GUI.

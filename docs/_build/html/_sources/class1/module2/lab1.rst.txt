@@ -1,7 +1,7 @@
-Deploy Web Applications
-=======================
+Deploy new Web Application
+==========================
 
-You will create a playbook to deploy applications to previously provisioned webservers.
+You will create a playbook to deploy new application to previously provisioned webservers.
 
 #. Create a playbook ``blue.yaml``.
 

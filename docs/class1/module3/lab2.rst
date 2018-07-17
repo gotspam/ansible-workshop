@@ -20,9 +20,9 @@ You will create a playbook to deploy VS, Pools and associated Members using iApp
       connection: local
 
       vars:
-        service_name: ""
-        service_ip: ""
-        service_group: ""
+        vs_name: ""
+        vs_ip: ""
+        vs_group: ""
         state: "present"
 
       environment: "{{ bigip_env }}"
@@ -31,16 +31,16 @@ You will create a playbook to deploy VS, Pools and associated Members using iApp
         - import_tasks: getsl.yaml
           when: state == "absent"
 
-        - name: Check if {{ service_name }} is deployed
+        - name: Check if {{ vs_name }} is deployed
           meta: end_play
-          when: 'state == "absent" and service_name not in (service_list.content|from_json)["items"]'
+          when: 'state == "absent" and vs_name not in (service_list.content|from_json)["items"]'
 
         - name: Build POST body
           template: src=f5.http.j2 dest=./f5.http.yaml
 
         - name: Adjust an iApp
           uri:
-            url: "https://{{ inventory_hostname }}/mgmt/tm/cloud/services/iapp/{{ service_name }}"
+            url: "https://{{ inventory_hostname }}/mgmt/tm/cloud/services/iapp/{{ vs_name }}"
             method: "{{ (state == 'present') | ternary('POST', 'DELETE') }}"
             body: "{{ (lookup('template','f5.http.yaml') | from_yaml) }}"
             body_format: json
@@ -53,7 +53,7 @@ You will create a playbook to deploy VS, Pools and associated Members using iApp
 
 #. Run this playbook.
 
-   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e vs_name="app4" -e vs_ip="10.1.10.110" -e vs_group="appservers"``
+   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e vs_name="app40" -e vs_ip="10.1.10.40" -e vs_group="appservers"``
 
 
    .. hint::
@@ -64,11 +64,11 @@ You will create a playbook to deploy VS, Pools and associated Members using iApp
 
    .. hint::
 
-      You should see app4 iapp services deployed.  App should be accessible on https://10.1.10.100.
+      You should see app40 iapp services deployed.  App should be accessible on https://10.1.10.40.
 
 
 #. Run this playbook to teardown.
 
-   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e vs_name="app4" -e vs_ip="10.1.10.40" -e vs_group="appservers" -e state="absent"``
+   - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e vs_name="app40" -e vs_ip="10.1.10.40" -e vs_group="appservers" -e state="absent"``
 
-#. Verify that app4 iapp should be deleted in BIG-IP GUI.
+#. Verify that app40 iapp should be deleted in BIG-IP GUI.

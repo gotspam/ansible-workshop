@@ -252,9 +252,9 @@
   <span class="n">connection</span><span class="p">:</span> <span class="n">local</span>
 
   <span class="nb">vars</span><span class="p">:</span>
-    <span class="n">service_name</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">service_ip</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
-    <span class="n">service_group</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">vs_name</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">vs_ip</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">vs_group</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
     <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;present&quot;</span>
 
   <span class="n">environment</span><span class="p">:</span> <span class="s2">&quot;{{ bigip_env }}&quot;</span>
@@ -263,16 +263,16 @@
     <span class="o">-</span> <span class="n">import_tasks</span><span class="p">:</span> <span class="n">getsl</span><span class="o">.</span><span class="n">yaml</span>
       <span class="n">when</span><span class="p">:</span> <span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;absent&quot;</span>
 
-    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Check</span> <span class="k">if</span> <span class="p">{{</span> <span class="n">service_name</span> <span class="p">}}</span> <span class="ow">is</span> <span class="n">deployed</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Check</span> <span class="k">if</span> <span class="p">{{</span> <span class="n">vs_name</span> <span class="p">}}</span> <span class="ow">is</span> <span class="n">deployed</span>
       <span class="n">meta</span><span class="p">:</span> <span class="n">end_play</span>
-      <span class="n">when</span><span class="p">:</span> <span class="s1">&#39;state == &quot;absent&quot; and service_name not in (service_list.content|from_json)[&quot;items&quot;]&#39;</span>
+      <span class="n">when</span><span class="p">:</span> <span class="s1">&#39;state == &quot;absent&quot; and vs_name not in (service_list.content|from_json)[&quot;items&quot;]&#39;</span>
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Build</span> <span class="n">POST</span> <span class="n">body</span>
       <span class="n">template</span><span class="p">:</span> <span class="n">src</span><span class="o">=</span><span class="n">f5</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">j2</span> <span class="n">dest</span><span class="o">=./</span><span class="n">f5</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">yaml</span>
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Adjust</span> <span class="n">an</span> <span class="n">iApp</span>
       <span class="n">uri</span><span class="p">:</span>
-        <span class="n">url</span><span class="p">:</span> <span class="s2">&quot;https://{{ inventory_hostname }}/mgmt/tm/cloud/services/iapp/{{ service_name }}&quot;</span>
+        <span class="n">url</span><span class="p">:</span> <span class="s2">&quot;https://{{ inventory_hostname }}/mgmt/tm/cloud/services/iapp/{{ vs_name }}&quot;</span>
         <span class="n">method</span><span class="p">:</span> <span class="s2">&quot;{{ (state == &#39;present&#39;) | ternary(&#39;POST&#39;, &#39;DELETE&#39;) }}&quot;</span>
         <span class="n">body</span><span class="p">:</span> <span class="s2">&quot;{{ (lookup(&#39;template&#39;,&#39;f5.http.yaml&#39;) | from_yaml) }}&quot;</span>
         <span class="n">body_format</span><span class="p">:</span> <span class="n">json</span>
@@ -287,7 +287,7 @@
 </li>
 <li><p class="first">Run this playbook.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/iapp.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">vs_name=&quot;app4&quot;</span> <span class="pre">-e</span> <span class="pre">vs_ip=&quot;10.1.10.110&quot;</span> <span class="pre">-e</span> <span class="pre">vs_group=&quot;appservers&quot;</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/iapp.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">vs_name=&quot;app40&quot;</span> <span class="pre">-e</span> <span class="pre">vs_ip=&quot;10.1.10.40&quot;</span> <span class="pre">-e</span> <span class="pre">vs_group=&quot;appservers&quot;</span></code></li>
 </ul>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
@@ -297,15 +297,15 @@
 <li><p class="first">Verify results in BIG-IP GUI.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">You should see app4 iapp services deployed.  App should be accessible on <a class="reference external" href="https://10.1.10.100">https://10.1.10.100</a>.</p>
+<p class="last">You should see app40 iapp services deployed.  App should be accessible on <a class="reference external" href="https://10.1.10.40">https://10.1.10.40</a>.</p>
 </div>
 </li>
 <li><p class="first">Run this playbook to teardown.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/iapp.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">vs_name=&quot;app4&quot;</span> <span class="pre">-e</span> <span class="pre">vs_ip=&quot;10.1.10.40&quot;</span> <span class="pre">-e</span> <span class="pre">vs_group=&quot;appservers&quot;</span> <span class="pre">-e</span> <span class="pre">state=&quot;absent&quot;</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/iapp.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">vs_name=&quot;app40&quot;</span> <span class="pre">-e</span> <span class="pre">vs_ip=&quot;10.1.10.40&quot;</span> <span class="pre">-e</span> <span class="pre">vs_group=&quot;appservers&quot;</span> <span class="pre">-e</span> <span class="pre">state=&quot;absent&quot;</span></code></li>
 </ul>
 </li>
-<li><p class="first">Verify that app4 iapp should be deleted in BIG-IP GUI.</p>
+<li><p class="first">Verify that app40 iapp should be deleted in BIG-IP GUI.</p>
 </li>
 </ol>
 </div>

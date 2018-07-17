@@ -240,7 +240,7 @@
 <ol class="arabic">
 <li><p class="first">Create a playbook <code class="docutils literal"><span class="pre">hack11.yaml</span></code>.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">playbooks/app.yaml</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">playbooks/hack11.yaml</span></code></li>
 <li>Type the following into the <code class="docutils literal"><span class="pre">playbooks/hack11.yaml</span></code> file.</li>
 </ul>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
@@ -249,10 +249,18 @@
   <span class="n">hosts</span><span class="p">:</span> <span class="n">bigips</span>
   <span class="n">gather_facts</span><span class="p">:</span> <span class="kc">False</span>
   <span class="n">connection</span><span class="p">:</span> <span class="n">local</span>
-  <span class="n">vars_files</span><span class="p">:</span>
-    <span class="o">-</span> <span class="o">../</span><span class="nb">vars</span><span class="o">/</span><span class="n">appseedinfo</span><span class="o">.</span><span class="n">yaml</span>
 
   <span class="nb">vars</span><span class="p">:</span>
+    <span class="n">vs_name</span><span class="p">:</span> <span class="s2">&quot;hack11&quot;</span>
+    <span class="n">vs_ip</span><span class="p">:</span> <span class="s2">&quot;10.1.10.11&quot;</span>
+    <span class="n">vs_port</span><span class="p">:</span> <span class="s2">&quot;443&quot;</span>
+    <span class="n">vs_snat</span><span class="p">:</span> <span class="s2">&quot;automap&quot;</span>
+    <span class="n">pl_name</span><span class="p">:</span> <span class="s2">&quot;hack11_pl&quot;</span>
+    <span class="n">pl_monitor</span><span class="p">:</span> <span class="s2">&quot;/Common/http&quot;</span>
+    <span class="n">pl_lb</span><span class="p">:</span> <span class="s2">&quot;round-robin&quot;</span>
+    <span class="n">nd_port</span><span class="p">:</span> <span class="s2">&quot;80&quot;</span>
+    <span class="n">nd_ip1</span><span class="p">:</span> <span class="s2">&quot;10.1.20.17&quot;</span>
+    <span class="n">nd_ip2</span><span class="p">:</span> <span class="s2">&quot;10.1.20.20&quot;</span>
     <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;present&quot;</span>
 
   <span class="n">environment</span><span class="p">:</span> <span class="s2">&quot;{{ bigip_env }}&quot;</span>
@@ -266,6 +274,7 @@
         <span class="n">snat</span><span class="p">:</span> <span class="s2">&quot;{{ vs_snat }}&quot;</span>
         <span class="n">all_profiles</span><span class="p">:</span>
           <span class="o">-</span> <span class="s2">&quot;tcp-lan-optimized&quot;</span>
+          <span class="o">-</span> <span class="s2">&quot;clientssl&quot;</span>
           <span class="o">-</span> <span class="s2">&quot;http&quot;</span>
           <span class="o">-</span> <span class="s2">&quot;analytics&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
@@ -333,11 +342,6 @@ Type <code class="docutils literal"><span class="pre">ansible-vault</span> <span
 </li>
 <li><p class="first">Browse to <code class="docutils literal"><span class="pre">http://10.1.10.11</span></code> to test Application</p>
 <a class="reference internal image-reference" href="../../_images/image034.png"><img alt="../../_images/image034.png" src="../../_images/image034.png" style="height: 300px;" /></a>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This playbook leverages a config seed file in vars/appseedinfo.yaml.  Simply modify this file to deploy a new service.
-Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">vars/appseedinfo.yaml</span></code> to review and modify.</p>
-</div>
 </li>
 </ol>
 </div>

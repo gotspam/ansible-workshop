@@ -242,7 +242,7 @@
 It does this by selecting portions of systems listed in Ansible’s inventory.
 For this lab, the ansible inventory file is <code class="docutils literal"><span class="pre">inventory/hosts</span></code>.</p>
 <ol class="arabic">
-<li><p class="first">Edit ansible inventory file and ensure it has the entries listed below.</p>
+<li><p class="first">Edit ansible inventory file and ensure it has the entries listed below.  This lab uses nano editor but you may substitute for vi or vim.</p>
 <ul class="simple">
 <li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">inventory/hosts</span></code> and modify if necessary</li>
 <li>Type the following into the <code class="docutils literal"><span class="pre">inventory/hosts</span></code> file</li>
@@ -253,7 +253,6 @@ For this lab, the ansible inventory file is <code class="docutils literal"><span
 <span class="p">[</span><span class="n">appservers</span><span class="p">]</span>
 <span class="mf">10.1</span><span class="o">.</span><span class="mf">20.17</span> <span class="n">ansible_user</span><span class="o">=</span><span class="n">root</span>
 <span class="mf">10.1</span><span class="o">.</span><span class="mf">20.20</span> <span class="n">ansible_user</span><span class="o">=</span><span class="n">root</span>
-<span class="c1">#10.1.1.252 ansible_user=root</span>
 
 <span class="p">[</span><span class="n">webservers</span><span class="p">]</span>
 <span class="mf">10.1</span><span class="o">.</span><span class="mf">20.15</span> <span class="n">ansible_user</span><span class="o">=</span><span class="n">root</span>
@@ -261,7 +260,7 @@ For this lab, the ansible inventory file is <code class="docutils literal"><span
 </pre></div>
 </div>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">ctrl</span> <span class="pre">x</span></code> then press <code class="docutils literal"><span class="pre">enter</span></code> save file.</li>
+<li>Type <code class="docutils literal"><span class="pre">ctrl</span> <span class="pre">x</span></code> then press <code class="docutils literal"><span class="pre">enter</span></code> to save file.</li>
 </ul>
 </li>
 </ol>

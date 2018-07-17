@@ -6,7 +6,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
 #. Create a playbook ``hack11.yaml``.
 
-   - Type ``nano playbooks/app.yaml``
+   - Type ``nano playbooks/hack11.yaml``
    - Type the following into the ``playbooks/hack11.yaml`` file.
 
    .. code::
@@ -17,10 +17,18 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
       hosts: bigips
       gather_facts: False
       connection: local
-      vars_files:
-        - ../vars/appseedinfo.yaml
 
       vars:
+        vs_name: "hack11"
+        vs_ip: "10.1.10.11"
+        vs_port: "443"
+        vs_snat: "automap"
+        pl_name: "hack11_pl"
+        pl_monitor: "/Common/http"
+        pl_lb: "round-robin"
+        nd_port: "80"
+        nd_ip1: "10.1.20.17"
+        nd_ip2: "10.1.20.20"
         state: "present"
 
       environment: "{{ bigip_env }}"
@@ -34,6 +42,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
             snat: "{{ vs_snat }}"
             all_profiles:
               - "tcp-lan-optimized"
+              - "clientssl"
               - "http"
               - "analytics"
             state: "{{ state }}"
@@ -103,8 +112,3 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
    .. image:: /_static/image034.png
           :height: 300px
-
-   .. NOTE::
-
-     This playbook leverages a config seed file in vars/appseedinfo.yaml.  Simply modify this file to deploy a new service.
-     Type ``nano vars/appseedinfo.yaml`` to review and modify.

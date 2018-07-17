@@ -9,7 +9,7 @@ Ansible works against multiple systems in your infrastructure at the same time.
 It does this by selecting portions of systems listed in Ansible’s inventory.
 For this lab, the ansible inventory file is ``inventory/hosts``.
 
-#. Edit ansible inventory file and ensure it has the entries listed below.
+#. Edit ansible inventory file and ensure it has the entries listed below.  This lab uses nano editor but you may substitute for vi or vim.
 
    - Type ``nano inventory/hosts`` and modify if necessary
    - Type the following into the ``inventory/hosts`` file
@@ -22,13 +22,12 @@ For this lab, the ansible inventory file is ``inventory/hosts``.
      [appservers]
      10.1.20.17 ansible_user=root
      10.1.20.20 ansible_user=root
-     #10.1.1.252 ansible_user=root
 
      [webservers]
      10.1.20.15 ansible_user=root
      10.1.20.16 ansible_user=root
 
-   - Type ``ctrl x`` then press ``enter`` save file.
+   - Type ``ctrl x`` then press ``enter`` to save file.
 
 **Create Playbook to deploy web application**
 

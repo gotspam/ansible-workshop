@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2.3.1. Create VS, Pool and Members using playbook variables &#8212; F5 Ansible Workshop  documentation</title>
+    <title>2.3.1. Create VS, Pool and Members using seed file &#8212; F5 Ansible Workshop  documentation</title>
     
     <link rel="stylesheet" href="../../_static/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -234,8 +234,8 @@
           <span class="right"><a href="../../genindex.html">Index</a></span>
         </h4>
         
-  <div class="section" id="create-vs-pool-and-members-using-playbook-variables">
-<h1>2.3.1. Create VS, Pool and Members using playbook variables<a class="headerlink" href="#create-vs-pool-and-members-using-playbook-variables" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="create-vs-pool-and-members-using-seed-file">
+<h1>2.3.1. Create VS, Pool and Members using seed file<a class="headerlink" href="#create-vs-pool-and-members-using-seed-file" title="Permalink to this headline">¶</a></h1>
 <p>You will create a consolidated playbook to deploy VS, Pools and associated Members.</p>
 <p><strong>Create consolidated playbook</strong></p>
 <ol class="arabic">
@@ -250,25 +250,21 @@
   <span class="n">hosts</span><span class="p">:</span> <span class="n">bigips</span>
   <span class="n">gather_facts</span><span class="p">:</span> <span class="kc">False</span>
   <span class="n">connection</span><span class="p">:</span> <span class="n">local</span>
+  <span class="n">vars_files</span><span class="p">:</span>
+    <span class="o">-</span> <span class="o">../</span><span class="nb">vars</span><span class="o">/</span><span class="p">{{</span> <span class="n">seed</span> <span class="p">}}</span>
 
   <span class="nb">vars</span><span class="p">:</span>
-    <span class="n">vsname</span><span class="p">:</span> <span class="s2">&quot;app2&quot;</span>
-    <span class="n">vsip</span><span class="p">:</span> <span class="s2">&quot;10.1.10.100&quot;</span>
-    <span class="n">vsport</span><span class="p">:</span> <span class="s2">&quot;443&quot;</span>
-    <span class="n">plname</span><span class="p">:</span> <span class="s2">&quot;app2_pl&quot;</span>
-    <span class="n">pmport</span><span class="p">:</span> <span class="s2">&quot;80&quot;</span>
-    <span class="n">pmhost1</span><span class="p">:</span> <span class="s2">&quot;10.1.20.11&quot;</span>
-    <span class="n">pmhost2</span><span class="p">:</span> <span class="s2">&quot;10.1.20.12&quot;</span>
     <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;present&quot;</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="s2">&quot;appseedinfo.yaml&quot;</span>
 
   <span class="n">environment</span><span class="p">:</span> <span class="s2">&quot;{{ bigip_env }}&quot;</span>
 
   <span class="n">tasks</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Adjust</span> <span class="n">virtual</span> <span class="n">server</span>
       <span class="n">bigip_virtual_server</span><span class="p">:</span>
-        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ vsname }}&quot;</span>
-        <span class="n">destination</span><span class="p">:</span> <span class="s2">&quot;{{ vsip }}&quot;</span>
-        <span class="n">port</span><span class="p">:</span> <span class="s2">&quot;{{ vsport }}&quot;</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ vs_name }}&quot;</span>
+        <span class="n">destination</span><span class="p">:</span> <span class="s2">&quot;{{ vs_ip }}&quot;</span>
+        <span class="n">port</span><span class="p">:</span> <span class="s2">&quot;{{ vs_port }}&quot;</span>
         <span class="n">description</span><span class="p">:</span> <span class="s2">&quot;Web App&quot;</span>
         <span class="n">snat</span><span class="p">:</span> <span class="s2">&quot;Automap&quot;</span>
         <span class="n">all_profiles</span><span class="p">:</span>
@@ -280,37 +276,37 @@
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Adjust</span> <span class="n">a</span> <span class="n">pool</span>
       <span class="n">bigip_pool</span><span class="p">:</span>
-        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ plname }}&quot;</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ pl_name }}&quot;</span>
         <span class="n">monitors</span><span class="p">:</span> <span class="s2">&quot;/Common/http&quot;</span>
         <span class="n">monitor_type</span><span class="p">:</span> <span class="s2">&quot;and_list&quot;</span>
         <span class="n">slow_ramp_time</span><span class="p">:</span> <span class="s2">&quot;120&quot;</span>
-        <span class="n">lb_method</span><span class="p">:</span> <span class="s2">&quot;ratio-member&quot;</span>
+        <span class="n">lb_method</span><span class="p">:</span> <span class="s2">&quot;{{ pl_lb }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Add</span> <span class="n">nodes</span>
       <span class="n">bigip_node</span><span class="p">:</span>
-        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost1 }}&quot;</span>
-        <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost1}}&quot;</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ item.name }}&quot;</span>
+        <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ item.host }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
       <span class="n">loop</span><span class="p">:</span>
-        <span class="o">-</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost1 }}&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost1 }}&quot;</span> <span class="p">}</span>
-        <span class="o">-</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost2 }}&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost2 }}&quot;</span> <span class="p">}</span>
+        <span class="o">-</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip1 }}&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip1 }}&quot;</span> <span class="p">}</span>
+        <span class="o">-</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip2 }}&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip2 }}&quot;</span> <span class="p">}</span>
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Add</span> <span class="n">nodes</span> <span class="n">to</span> <span class="n">pool</span>
       <span class="n">bigip_pool_member</span><span class="p">:</span>
         <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ item.host }}&quot;</span>
-        <span class="n">port</span><span class="p">:</span> <span class="s2">&quot;{{ pmport }}&quot;</span>
-        <span class="n">pool</span><span class="p">:</span> <span class="s2">&quot;{{ plname }}&quot;</span>
+        <span class="n">port</span><span class="p">:</span> <span class="s2">&quot;{{ nd_port }}&quot;</span>
+        <span class="n">pool</span><span class="p">:</span> <span class="s2">&quot;{{ pl_name }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
       <span class="n">loop</span><span class="p">:</span>
-        <span class="o">-</span> <span class="p">{</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost1 }}&quot;</span> <span class="p">}</span>
-        <span class="o">-</span> <span class="p">{</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ pmhost2 }}&quot;</span> <span class="p">}</span>
+        <span class="o">-</span> <span class="p">{</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip1 }}&quot;</span> <span class="p">}</span>
+        <span class="o">-</span> <span class="p">{</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip2 }}&quot;</span> <span class="p">}</span>
       <span class="n">when</span><span class="p">:</span> <span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;present&quot;</span>
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Update</span> <span class="n">a</span> <span class="n">VS</span>
       <span class="n">bigip_virtual_server</span><span class="p">:</span>
-        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ vsname }}&quot;</span>
-        <span class="n">pool</span><span class="p">:</span> <span class="s2">&quot;{{ plname }}&quot;</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ vs_name }}&quot;</span>
+        <span class="n">pool</span><span class="p">:</span> <span class="s2">&quot;{{ pl_name }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
       <span class="n">when</span><span class="p">:</span> <span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;present&quot;</span>
 </pre></div>
@@ -327,7 +323,7 @@
 <li><p class="first">Verify results in BIG-IP GUI and browse to app.</p>
 <div class="admonition hint">
 <p class="first admonition-title">Hint</p>
-<p class="last">You should see app2 deployed with 2 pool members.  App should be accessible on <a class="reference external" href="https://10.1.10.100">https://10.1.10.100</a>.</p>
+<p class="last">You should see www12 deployed with 2 pool members.  App should be accessible on <a class="reference external" href="https://10.1.10.12">https://10.1.10.12</a>.</p>
 </div>
 </li>
 <li><p class="first">Run this playbook to teardown app.</p>
@@ -335,7 +331,7 @@
 <li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">playbooks/app.yaml</span> <span class="pre">-e</span> <span class="pre">state=&quot;absent&quot;</span></code></li>
 </ul>
 </li>
-<li><p class="first">Verify that app2, pool and nodes should be deleted in BIG-IP GUI.</p>
+<li><p class="first">Verify that www12, pool and nodes should be deleted in BIG-IP GUI.</p>
 </li>
 </ol>
 </div>

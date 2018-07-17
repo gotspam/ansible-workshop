@@ -11,7 +11,7 @@ You will create a playbook to deploy VS, Pools and associated Members using App 
 
    - Type ``ansible-playbook playbooks/service_4.yaml -e @creds.yaml --ask-vault-pass``
 
-#. Verify results in BIG-IP GUI and browse to ``https://10.1.10.40``.
+#. Verify results in BIG-IP GUI and browse to ``https://10.1.10.100``.
 
    .. HINT::
 
