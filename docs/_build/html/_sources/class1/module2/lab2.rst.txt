@@ -108,7 +108,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
    .. image:: /_static/image033.png
          :height: 140px
 
-#. Browse to ``http://10.1.10.11`` to test Application
+#. Browse to ``https://10.1.10.11`` to test Application
 
    .. image:: /_static/image034.png
           :height: 300px
