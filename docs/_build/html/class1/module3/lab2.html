@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="2.3.3. Create VS, Pool and Members using App Services (AS3)" href="lab3.html" />
-    <link rel="prev" title="2.3.1. Create VS, Pool and Members using playbook variables" href="lab1.html" />
+    <link rel="prev" title="2.3.1. Create VS, Pool and Members using seed file" href="lab1.html" />
 <!--
 # Copyright 2017 F5 Networks
 #
@@ -222,7 +222,7 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="lab1.html"
-                        title="previous chapter">2.3.1. Create VS, Pool and Members using playbook variables</a></p>
+                        title="previous chapter">2.3.1. Create VS, Pool and Members using seed file</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="lab3.html"
                         title="next chapter">2.3.3. Create VS, Pool and Members using App Services (AS3)</a></p>
@@ -308,6 +308,12 @@
 <li><p class="first">Verify that app40 iapp should be deleted in BIG-IP GUI.</p>
 </li>
 </ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>F5 iApps</strong>, automate the configuration of advanced L4-L7 functionality. Deploying an iApp from an Ansible playbook means the Ansible admin can deliver advanced L4-L7 services without the requirement for F5 domain-specific knowledge.
+You take the JSON payload and convert to YAML using online tools like <a class="reference external" href="http://www.json2yaml.com">http://www.json2yaml.com</a>.
+For this particular exercise, the service is defined in the <code class="docutils literal"><span class="pre">playbooks/f5.http.yaml</span></code> file built leveraging the <code class="docutils literal"><span class="pre">playbooks/f5.http.j2</span></code> file. Parameters for the name, destination (VIP), and pool members are passed through the command line through the <code class="docutils literal"><span class="pre">-e</span> <span class="pre">vs_ip</span></code> and <code class="docutils literal"><span class="pre">-e</span> <span class="pre">vs_group</span></code> mantras.  The service_group refers to the app_servers defined in the ./inventory/hosts file.</p>
+</div>
 </div>
 
 
@@ -315,7 +321,7 @@
 		     <div class="row next-prev-btn-row">
            <div class="col-lg-12">
            
-		        <a href="lab1.html" title="2.3.1. Create VS, Pool and Members using playbook variables" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
+		        <a href="lab1.html" title="2.3.1. Create VS, Pool and Members using seed file" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
            
            
               <a href="lab3.html" title="2.3.3. Create VS, Pool and Members using App Services (AS3)" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>

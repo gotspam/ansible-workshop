@@ -72,3 +72,9 @@ You will create a playbook to deploy VS, Pools and associated Members using iApp
    - Type ``ansible-playbook playbooks/iapp.yaml -e @creds.yaml --ask-vault-pass -e vs_name="app40" -e vs_ip="10.1.10.40" -e vs_group="appservers" -e state="absent"``
 
 #. Verify that app40 iapp should be deleted in BIG-IP GUI.
+
+.. NOTE::
+
+  **F5 iApps**, automate the configuration of advanced L4-L7 functionality. Deploying an iApp from an Ansible playbook means the Ansible admin can deliver advanced L4-L7 services without the requirement for F5 domain-specific knowledge.
+  You take the JSON payload and convert to YAML using online tools like http://www.json2yaml.com.
+  For this particular exercise, the service is defined in the ``playbooks/f5.http.yaml`` file built leveraging the ``playbooks/f5.http.j2`` file. Parameters for the name, destination (VIP), and pool members are passed through the command line through the ``-e vs_ip`` and ``-e vs_group`` mantras.  The service_group refers to the app_servers defined in the ./inventory/hosts file.

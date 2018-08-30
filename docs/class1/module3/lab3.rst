@@ -5,19 +5,20 @@ You will create a playbook to deploy VS, Pools and associated Members using App 
 
 **Create service playbook using AS3**
 
-#. Examine playbook ``service_4.yaml``.
+#. Examine playbook ``service_4.yaml``
+   - Type ``nano playbooks/service_4.yaml``
+
+   .. NOTE::
+
+     This playbook uses **roles** which contain their own vars, files and tasks. Grouping content by roles allows easy sharing of playbooks with other users.  You may examine the files in roles/service_4 directory.
 
 #. Run this playbook.
 
    - Type ``ansible-playbook playbooks/service_4.yaml -e @creds.yaml --ask-vault-pass``
 
-#. Verify results in BIG-IP GUI and browse to ``https://10.1.10.100``.
-
-   .. HINT::
-
-   You must be in the Service4 partition to see the serviceMain virtual server.
-   AS3 is designed with multitenancy in mind.  Also, note that this application
-   was deployed with an WAF security policy.
+#. Verify results in BIG-IP GUI.
+#. From the BIG-IP GUI, select **Local Traffic->Virtual Servers** page.  Note there are no virtual servers listed.  You will need to select ``Service4`` partition on the top right to view the ``serviceMain`` service.
+#. Select **serviceMain** then **Security->Polocies** and note the ``service_4_WAF`` created.
 
 #. Run this playbook to teardown.
 
@@ -27,6 +28,7 @@ You will create a playbook to deploy VS, Pools and associated Members using App 
 
 .. NOTE::
 
-  A role is a way to encapsulate a body of work. This role could have been zipped up and given to anyone else and they could have extracted it and run it the same way that you did.
+  Roles are ways of automatically loading certain vars_files, tasks, and handlers based on a known file structure. Grouping content by roles also allows easy sharing of roles with other users.
+  Additional info on use of roles can be seen at `this link`_.
 
-  Roles can include their own files, templates, and even custom modules. They should be your go-to solution for all your work that is beyond a single playbook.
+  .. _this link: https://docs.ansible.com/ansible/2.5/user_guide/playbooks_reuse_roles.html

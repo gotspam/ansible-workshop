@@ -94,3 +94,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
    - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/app.yaml -e state="absent"``
 
 #. Verify that www12, pool and nodes should be deleted in BIG-IP GUI.
+
+.. NOTE::
+
+  This playbook leverages a config seed file in files/appseedinfo.yaml.  Simply modify this file to deploy a new service.

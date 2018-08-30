@@ -235,17 +235,23 @@
 <p>You will create a playbook to deploy VS, Pools and associated Members using App Services.</p>
 <p><strong>Create service playbook using AS3</strong></p>
 <ol class="arabic">
-<li><p class="first">Examine playbook <code class="docutils literal"><span class="pre">service_4.yaml</span></code>.</p>
+<li><p class="first">Examine playbook <code class="docutils literal"><span class="pre">service_4.yaml</span></code>
+- Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">playbooks/service_4.yaml</span></code></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This playbook uses <strong>roles</strong> which contain their own vars, files and tasks. Grouping content by roles allows easy sharing of playbooks with other users.  You may examine the files in roles/service_4 directory.</p>
+</div>
 </li>
 <li><p class="first">Run this playbook.</p>
 <ul class="simple">
 <li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/service_4.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span></code></li>
 </ul>
 </li>
-<li><p class="first">Verify results in BIG-IP GUI and browse to <code class="docutils literal"><span class="pre">https://10.1.10.100</span></code>.</p>
-<p>You must be in the Service4 partition to see the serviceMain virtual server.
-AS3 is designed with multitenancy in mind.  Also, note that this application
-was deployed with an WAF security policy.</p>
+<li><p class="first">Verify results in BIG-IP GUI.</p>
+</li>
+<li><p class="first">From the BIG-IP GUI, select <strong>Local Traffic-&gt;Virtual Servers</strong> page.  Note there are no virtual servers listed.  You will need to select <code class="docutils literal"><span class="pre">Service4</span></code> partition on the top right to view the <code class="docutils literal"><span class="pre">serviceMain</span></code> service.</p>
+</li>
+<li><p class="first">Select <strong>serviceMain</strong> then <strong>Security-&gt;Polocies</strong> and note the <code class="docutils literal"><span class="pre">service_4_WAF</span></code> created.</p>
 </li>
 <li><p class="first">Run this playbook to teardown.</p>
 <ul class="simple">
@@ -257,8 +263,8 @@ was deployed with an WAF security policy.</p>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>A role is a way to encapsulate a body of work. This role could have been zipped up and given to anyone else and they could have extracted it and run it the same way that you did.</p>
-<p class="last">Roles can include their own files, templates, and even custom modules. They should be your go-to solution for all your work that is beyond a single playbook.</p>
+<p class="last">Roles are ways of automatically loading certain vars_files, tasks, and handlers based on a known file structure. Grouping content by roles also allows easy sharing of roles with other users.
+Additional info on use of roles can be seen at <a class="reference external" href="https://docs.ansible.com/ansible/2.5/user_guide/playbooks_reuse_roles.html">this link</a>.</p>
 </div>
 </div>
 
