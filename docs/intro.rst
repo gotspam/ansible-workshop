@@ -20,7 +20,7 @@ Connect to lab
 #. Look for the xubuntu-jumpbox-vxx.  You will use the xubuntu jumpbox for all the labs. (see below)
 
 .. image:: /_static/image001.png
-   :height: 700px
+   :height: 500px
 
 #. You can click on **RDP** to RDP to the Xubuntu jumpbox or you can select the **CONSOLE** link and access the jumpbox via your browser.  **The CONSOLE link requires you turn off pop-up blockers.**
 
@@ -33,11 +33,12 @@ Connect to lab
 #. SSH to ansible host
 
    - ``Windows Users``: Launch putty and connect to ansible.
-   - ``Mac Users``: Open Terminal Emulator and type ``ssh root@10.1.1.150``.
+   - ``Mac Users``: Open Terminal Emulator and type ``ssh root@10.1.1.150``.  If prompted, password is **password**.
 
 #. Change directory to access lab directory folder.
 
-   - type ``cd f5-ansible-workshop``
+   - type ``cd f5-ansible-workshop`` to change directory to location of the ansible lab.
+   - type ``pwd`` to confirm path is **/root/f5-ansible-workshop**.
 
 .. list-table::
     :widths: 20 40 40

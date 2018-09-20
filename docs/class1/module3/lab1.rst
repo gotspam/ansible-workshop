@@ -97,4 +97,4 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
 .. NOTE::
 
-  This playbook leverages a config seed file in files/appseedinfo.yaml.  Simply modify this file to deploy a new service.
+  This playbook leverages a config seed file in vars/appseedinfo.yaml.  Simply modify this file to deploy a new service.

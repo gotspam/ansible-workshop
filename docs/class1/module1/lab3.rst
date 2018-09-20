@@ -42,5 +42,5 @@ F5 BIG-IP has created iApp templates to ease deployment process.
    .. NOTE::
 
      The application is now published and should be available from external network.
-     The F5 BIG-IP is terminating secure connections and distributing traffic to
+     The F5 BIG-IP is terminating connections and distributing traffic to
      backend webservers.

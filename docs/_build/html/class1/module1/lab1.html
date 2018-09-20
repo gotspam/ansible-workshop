@@ -237,12 +237,15 @@
   <div class="section" id="deploy-web-applications">
 <h1>2.1.1. Deploy Web Applications<a class="headerlink" href="#deploy-web-applications" title="Permalink to this headline">¶</a></h1>
 <p>You will create a playbook to deploy applications to previously provisioned webservers.</p>
+<p>As a reminder, the following assumes that you are using RDP to access the Jump
+host provided for this lab, that you are SSH’d into the “Ansible”
+host and that the current working directory in that session is <code class="docutils literal"><span class="pre">/root/f5-ansible-workshop</span></code>.</p>
 <p><strong>Examine ansible inventory file</strong></p>
 <p>Ansible works against multiple systems in your infrastructure at the same time.
 It does this by selecting portions of systems listed in Ansible’s inventory.
 For this lab, the ansible inventory file is <code class="docutils literal"><span class="pre">inventory/hosts</span></code>.</p>
 <ol class="arabic">
-<li><p class="first">Edit ansible inventory file and ensure it has the entries listed below.  This lab uses nano editor but you may substitute for vi or vim.</p>
+<li><p class="first">Edit ansible inventory file and ensure it has the entries listed below.  This lab is written for use with nano editor but you may substitute with vi or vim.</p>
 <ul class="simple">
 <li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">inventory/hosts</span></code> and modify if necessary</li>
 <li>Type the following into the <code class="docutils literal"><span class="pre">inventory/hosts</span></code> file</li>
@@ -296,23 +299,24 @@ For this lab, the ansible inventory file is <code class="docutils literal"><span
 <li>Type <code class="docutils literal"><span class="pre">ctrl</span> <span class="pre">x</span></code> and save file.</li>
 </ul>
 </li>
-<li><p class="first">Run this playbook.</p>
+<li><p class="first">Run this playbook to copy files from ansible host to destination webservers.</p>
 <ul class="simple">
 <li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/newapp.yaml</span></code></li>
 </ul>
 <p>If successful, you should see similar results</p>
-<a class="reference internal image-reference" href="../../_images/image011.png"><img alt="../../_images/image011.png" src="../../_images/image011.png" style="height: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/image011.png"><img alt="../../_images/image011.png" src="../../_images/image011.png" style="height: 300px;" /></a>
 </li>
 <li><p class="first">Verify results by browsing to websites.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">curl</span> <span class="pre">http://10.1.20.15</span></code> and <code class="docutils literal"><span class="pre">curl</span> <span class="pre">http://10.1.20.16</span></code>.</li>
+<li>Type <code class="docutils literal"><span class="pre">curl</span> <span class="pre">http://10.1.20.15</span> <span class="pre">--silent</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">SERVER_NAME</span></code> and <code class="docutils literal"><span class="pre">curl</span> <span class="pre">http://10.1.20.16</span> <span class="pre">--silent</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">SERVER_NAME</span></code>.</li>
 </ul>
+<a class="reference internal image-reference" href="../../_images/image011a.png"><img alt="../../_images/image011a.png" src="../../_images/image011a.png" style="height: 80px;" /></a>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal"><span class="pre">hosts:</span> <span class="pre">webservers</span></code> referenced are located in the <code class="docutils literal"><span class="pre">inventory/hosts</span></code>
-file.  These addresses are on an internal vlan and not accessible by external
-users.  Upon successful deployment of the app you must configure app services
-for these applications to be accessible externally.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">hosts:</span> <span class="pre">webservers</span></code> referenced are defined in the <code class="docutils literal"><span class="pre">inventory/hosts</span></code>
+file.  These webservers are on an internal vlan and not typically accessible by external
+users.  Upon successful deployment of the applications, app owners typically submit request for NetOps to configure app services
+such as dns, load balancing and firewall, before these applications can be accessed externally.</p>
 </div>
 </li>
 </ol>

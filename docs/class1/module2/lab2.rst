@@ -87,12 +87,15 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
    - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/hack11.yaml``
 
-   You will be prompted for vault ``password`` before executing the playbook.
+   You will be prompted for a password before executing the playbook.  Password is **password**.
    If successful, you should see config for virtual servers, pools and nodes.
 
    .. NOTE::
 
-    Type ``ansible-vault view creds.yaml`` to modify the vault file.
+    ``ansible-vault`` is used to store passwords and other sensitive info for use by ansible playbooks.
+
+    Type ``cat creds.yaml`` to confirm vault file is encrypted.
+    Type ``ansible-vault view creds.yaml`` to view the vault file.
     Type ``ansible-vault edit creds.yaml`` to modify the vault file.
 
 
@@ -108,7 +111,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
    .. image:: /_static/image033.png
          :height: 140px
 
-#. Browse to ``https://10.1.10.11`` to test Application
+#. Browse to ``https://10.1.10.11`` to test Application.  Hackazon image should be **green**.
 
    .. image:: /_static/image034.png
           :height: 300px

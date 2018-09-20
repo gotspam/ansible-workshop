@@ -42,7 +42,7 @@ This demonstrates a very simple example to provide continuous updates.
 
    - Type ``ansible-playbook playbooks/enable.yaml -e @creds.yaml --ask-vault-pass -e pool="hack11_pl" -e pmhost="10.1.20.20" -e pmport="80"``
 
-#. Browse to ``https://10.1.10.11`` to test Application
+#. Browse to ``https://10.1.10.11`` to test Application.  Hackazon image should be **blue**.
 
    .. image:: /_static/image099.png
           :height: 300px
