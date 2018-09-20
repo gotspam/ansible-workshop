@@ -79,4 +79,5 @@ You will create a playbook to deploy new application to previously provisioned w
 
 #. Verify results by browsing to websites.
 
-   - Type ``curl http://10.1.20.17 --silent | grep "/images/Hackazon.png"`` and ``curl http://10.1.20.20 --silent | grep "/images/Hackazon.png"``
+   - Type **curl http://10.1.20.17 --silent | grep "/images/Hackazon.png"**
+   - Type :guilabel:`curl http://10.1.20.20 --silent | grep "/images/Hackazon.png"`

@@ -76,7 +76,7 @@ For this lab, the ansible inventory file is ``inventory/hosts``.
 
 #. Verify results by browsing to websites.
 
-   - Type ``curl http://10.1.20.15 --silent | grep SERVER_NAME`` and ``curl http://10.1.20.16 --silent | grep SERVER_NAME``.
+   - Type ``curl http://10.1.20.15 --silent | grep SERVER_NAME`` and ``curl http://10.1.20.16 --silent | grep SERVER_NAME``
 
    .. image:: /_static/image011a.png
        :height: 80px
