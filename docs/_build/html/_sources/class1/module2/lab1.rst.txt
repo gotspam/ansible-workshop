@@ -8,7 +8,6 @@ You will create a playbook to deploy new application to previously provisioned w
    - Type ``nano playbooks/blue.yaml``
    - Type the following into the ``playbooks/blue.yaml`` file.
 
-
    .. code::
 
      ---
@@ -21,13 +20,13 @@ You will create a playbook to deploy new application to previously provisioned w
        tasks:
          - name: Upload blue changes to server17
            copy:
-             src: ../roles/appserv/files/HackazonBlue.png
+             src: ../files/HackazonBlue.png
              dest: /var/www/hackazon1/web/images/Hackazon.png
            tags: 17blue
 
          - name: Upload blue changes to server20
            copy:
-             src: ../roles/appserv/files/HackazonBlue.png
+             src: ../files/HackazonBlue.png
              dest: /var/www/hackazon/web/images/Hackazon.png
            tags: 20blue
 
@@ -45,7 +44,6 @@ You will create a playbook to deploy new application to previously provisioned w
    - Type ``nano playbooks/green.yaml``
    - Type the following into the ``playbooks/green.yaml`` file.
 
-
    .. code::
 
      ---
@@ -58,13 +56,13 @@ You will create a playbook to deploy new application to previously provisioned w
        tasks:
          - name: Upload green changes to server17
            copy:
-             src: ../roles/appserv/files/HackazonGreen.png
+             src: ../files/HackazonGreen.png
              dest: /var/www/hackazon1/web/images/Hackazon.png
            tags: 17green
 
          - name: Upload green changes to server20
            copy:
-             src: ../roles/appserv/files/HackazonGreen.png
+             src: ../files/HackazonGreen.png
              dest: /var/www/hackazon/web/images/Hackazon.png
            tags: 20green
 
@@ -79,5 +77,5 @@ You will create a playbook to deploy new application to previously provisioned w
 
 #. Verify results by browsing to websites.
 
-   - Type **curl http://10.1.20.17 --silent | grep "/images/Hackazon.png"**
-   - Type :guilabel:`curl http://10.1.20.20 --silent | grep "/images/Hackazon.png"`
+   - Type ``curl http://10.1.20.17 --silent | grep "/images/Hackazon.png"``
+   - Type ``curl http://10.1.20.20 --silent | grep "/images/Hackazon.png"``
