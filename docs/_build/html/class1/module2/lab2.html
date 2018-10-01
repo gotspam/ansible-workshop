@@ -262,6 +262,10 @@
     <span class="n">nd_ip1</span><span class="p">:</span> <span class="s2">&quot;10.1.20.17&quot;</span>
     <span class="n">nd_ip2</span><span class="p">:</span> <span class="s2">&quot;10.1.20.20&quot;</span>
     <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;present&quot;</span>
+    <span class="n">username</span><span class="p">:</span> <span class="n">admin</span>
+    <span class="n">password</span><span class="p">:</span> <span class="n">admin</span>
+    <span class="n">server</span><span class="p">:</span> <span class="mf">10.1</span><span class="o">.</span><span class="mf">1.245</span>
+    <span class="n">valid_certs</span><span class="p">:</span> <span class="n">no</span>
 
   <span class="n">environment</span><span class="p">:</span> <span class="s2">&quot;{{ bigip_env }}&quot;</span>
 
@@ -278,6 +282,10 @@
           <span class="o">-</span> <span class="s2">&quot;http&quot;</span>
           <span class="o">-</span> <span class="s2">&quot;analytics&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
+        <span class="n">password</span><span class="p">:</span> <span class="s2">&quot;{{ password }}&quot;</span>
+        <span class="n">server</span><span class="p">:</span> <span class="s2">&quot;{{ server }}&quot;</span>
+        <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;{{ username }}&quot;</span>
+        <span class="n">validate_certs</span><span class="p">:</span> <span class="s2">&quot;{{ valid_certs }}&quot;</span>
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Adjust</span> <span class="n">a</span> <span class="n">pool</span>
       <span class="n">bigip_pool</span><span class="p">:</span>
@@ -285,12 +293,20 @@
         <span class="n">monitors</span><span class="p">:</span> <span class="s2">&quot;{{ pl_monitor }}&quot;</span>
         <span class="n">lb_method</span><span class="p">:</span> <span class="s2">&quot;{{ pl_lb }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
+        <span class="n">password</span><span class="p">:</span> <span class="s2">&quot;{{ password }}&quot;</span>
+        <span class="n">server</span><span class="p">:</span> <span class="s2">&quot;{{ server }}&quot;</span>
+        <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;{{ username }}&quot;</span>
+        <span class="n">validate_certs</span><span class="p">:</span> <span class="s2">&quot;{{ valid_certs }}&quot;</span>
 
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Add</span> <span class="n">nodes</span>
       <span class="n">bigip_node</span><span class="p">:</span>
         <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ item.name }}&quot;</span>
         <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ item.host }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
+        <span class="n">password</span><span class="p">:</span> <span class="s2">&quot;{{ password }}&quot;</span>
+        <span class="n">server</span><span class="p">:</span> <span class="s2">&quot;{{ server }}&quot;</span>
+        <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;{{ username }}&quot;</span>
+        <span class="n">validate_certs</span><span class="p">:</span> <span class="s2">&quot;{{ valid_certs }}&quot;</span>
       <span class="n">loop</span><span class="p">:</span>
         <span class="o">-</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip1 }}&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip1 }}&quot;</span> <span class="p">}</span>
         <span class="o">-</span> <span class="p">{</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip2 }}&quot;</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip2 }}&quot;</span> <span class="p">}</span>
@@ -301,6 +317,10 @@
         <span class="n">port</span><span class="p">:</span> <span class="s2">&quot;{{ nd_port }}&quot;</span>
         <span class="n">pool</span><span class="p">:</span> <span class="s2">&quot;{{ pl_name }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
+        <span class="n">password</span><span class="p">:</span> <span class="s2">&quot;{{ password }}&quot;</span>
+        <span class="n">server</span><span class="p">:</span> <span class="s2">&quot;{{ server }}&quot;</span>
+        <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;{{ username }}&quot;</span>
+        <span class="n">validate_certs</span><span class="p">:</span> <span class="s2">&quot;{{ valid_certs }}&quot;</span>
       <span class="n">loop</span><span class="p">:</span>
         <span class="o">-</span> <span class="p">{</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip1 }}&quot;</span> <span class="p">}</span>
         <span class="o">-</span> <span class="p">{</span> <span class="n">host</span><span class="p">:</span> <span class="s2">&quot;{{ nd_ip2 }}&quot;</span> <span class="p">}</span>
@@ -311,6 +331,10 @@
         <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ vs_name }}&quot;</span>
         <span class="n">pool</span><span class="p">:</span> <span class="s2">&quot;{{ pl_name }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
+        <span class="n">password</span><span class="p">:</span> <span class="s2">&quot;{{ password }}&quot;</span>
+        <span class="n">server</span><span class="p">:</span> <span class="s2">&quot;{{ server }}&quot;</span>
+        <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;{{ username }}&quot;</span>
+        <span class="n">validate_certs</span><span class="p">:</span> <span class="s2">&quot;{{ valid_certs }}&quot;</span>
       <span class="n">when</span><span class="p">:</span> <span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;present&quot;</span>
 </pre></div>
 </div>
@@ -320,17 +344,8 @@
 </li>
 <li><p class="first">Run this playbook.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">playbooks/hack11.yaml</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/hack11.yaml</span></code></li>
 </ul>
-<p>You will be prompted for a password before executing the playbook.  Password is <strong>password</strong>.
-If successful, you should see config for virtual servers, pools and nodes.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p><code class="docutils literal"><span class="pre">ansible-vault</span></code> is used to store passwords and other sensitive info for use by ansible playbooks.</p>
-<p class="last">Type <code class="docutils literal"><span class="pre">cat</span> <span class="pre">creds.yaml</span></code> to confirm vault file is encrypted.
-Type <code class="docutils literal"><span class="pre">ansible-vault</span> <span class="pre">view</span> <span class="pre">creds.yaml</span></code> to view the vault file.
-Type <code class="docutils literal"><span class="pre">ansible-vault</span> <span class="pre">edit</span> <span class="pre">creds.yaml</span></code> to modify the vault file.</p>
-</div>
 </li>
 <li><p class="first">Verify results in BIG-IP GUI.</p>
 <ul class="simple">

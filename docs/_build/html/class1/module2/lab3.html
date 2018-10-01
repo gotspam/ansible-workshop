@@ -277,6 +277,15 @@ Use the <code class="docutils literal"><span class="pre">-e</span></code>, or <c
 <ul class="simple">
 <li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">playbooks/offline.yaml</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">-e</span> <span class="pre">pool=&quot;hack11_pl&quot;</span> <span class="pre">-e</span> <span class="pre">pmhost=&quot;10.1.20.17&quot;</span> <span class="pre">-e</span> <span class="pre">pmport=&quot;80&quot;</span></code></li>
 </ul>
+<p>You will be prompted for a password before executing the playbook.  Password is <strong>password</strong>.
+If successful, you should see config for virtual servers, pools and nodes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><code class="docutils literal"><span class="pre">ansible-vault</span></code> is used to store passwords and other sensitive info for use by ansible playbooks.</p>
+<p class="last">Type <code class="docutils literal"><span class="pre">cat</span> <span class="pre">creds.yaml</span></code> to confirm vault file is encrypted.
+Type <code class="docutils literal"><span class="pre">ansible-vault</span> <span class="pre">view</span> <span class="pre">creds.yaml</span></code> to view the vault file.
+Type <code class="docutils literal"><span class="pre">ansible-vault</span> <span class="pre">edit</span> <span class="pre">creds.yaml</span></code> to modify the vault file.</p>
+</div>
 </li>
 <li><p class="first">Verify if pool member 10.1.20.17 is <code class="docutils literal"><span class="pre">forced</span> <span class="pre">offline</span></code></p>
 <ul class="simple">

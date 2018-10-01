@@ -239,10 +239,10 @@
 <p>You will create a consolidated playbook to deploy VS, Pools and associated Members.</p>
 <p><strong>Create consolidated playbook</strong></p>
 <ol class="arabic">
-<li><p class="first">Create a playbook <code class="docutils literal"><span class="pre">app.yaml</span></code>.</p>
+<li><p class="first">Create a playbook <code class="docutils literal"><span class="pre">seedapp.yaml</span></code>.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">playbooks/app.yaml</span></code></li>
-<li>Type the following into the <code class="docutils literal"><span class="pre">playbooks/app.yaml</span></code> file.</li>
+<li>Type <code class="docutils literal"><span class="pre">nano</span> <span class="pre">playbooks/seedapp.yaml</span></code></li>
+<li>Type the following into the <code class="docutils literal"><span class="pre">playbooks/seedapp.yaml</span></code> file.</li>
 </ul>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="o">---</span>
 
@@ -255,7 +255,7 @@
 
   <span class="nb">vars</span><span class="p">:</span>
     <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;present&quot;</span>
-    <span class="n">seed</span><span class="p">:</span> <span class="s2">&quot;appseedinfo.yaml&quot;</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="s2">&quot;seed1.yaml&quot;</span>
 
   <span class="n">environment</span><span class="p">:</span> <span class="s2">&quot;{{ bigip_env }}&quot;</span>
 
@@ -276,9 +276,7 @@
     <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Adjust</span> <span class="n">a</span> <span class="n">pool</span>
       <span class="n">bigip_pool</span><span class="p">:</span>
         <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ pl_name }}&quot;</span>
-        <span class="n">monitors</span><span class="p">:</span> <span class="s2">&quot;/Common/http&quot;</span>
-        <span class="n">monitor_type</span><span class="p">:</span> <span class="s2">&quot;and_list&quot;</span>
-        <span class="n">slow_ramp_time</span><span class="p">:</span> <span class="s2">&quot;120&quot;</span>
+        <span class="n">monitors</span><span class="p">:</span> <span class="s2">&quot;{{ pl_monitor }}&quot;</span>
         <span class="n">lb_method</span><span class="p">:</span> <span class="s2">&quot;{{ pl_lb }}&quot;</span>
         <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;{{ state }}&quot;</span>
 
@@ -316,7 +314,7 @@
 </li>
 <li><p class="first">Run this playbook.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">playbooks/app.yaml</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">playbooks/seedapp.yaml</span></code></li>
 </ul>
 </li>
 <li><p class="first">Verify results in BIG-IP GUI and browse to app.</p>
@@ -327,7 +325,7 @@
 </li>
 <li><p class="first">Run this playbook to teardown app.</p>
 <ul class="simple">
-<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">playbooks/app.yaml</span> <span class="pre">-e</span> <span class="pre">state=&quot;absent&quot;</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">ansible-playbook</span> <span class="pre">-e</span> <span class="pre">&#64;creds.yaml</span> <span class="pre">--ask-vault-pass</span> <span class="pre">playbooks/seedapp.yaml</span> <span class="pre">-e</span> <span class="pre">state=&quot;absent&quot;</span></code></li>
 </ul>
 </li>
 <li><p class="first">Verify that www12, pool and nodes should be deleted in BIG-IP GUI.</p>
@@ -335,7 +333,7 @@
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This playbook leverages a config seed file in vars/appseedinfo.yaml.  Simply modify this file to deploy a new service.</p>
+<p class="last">This playbook leverages a config seed file in vars/seed1.yaml.  Create a new file vars/seed2.yaml to deploy a new service.</p>
 </div>
 </div>
 

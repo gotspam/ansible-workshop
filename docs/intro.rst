@@ -10,36 +10,6 @@ Each student will have a BIG-IP VE environment with IP addressing as below:
 
 .. image:: /_static/image000.png
 
-Connect to lab
-~~~~~~~~~~~~~~
-
-**Accessing the lab environment.**
-
-#. Open a browser and go to student portal site as provided by instructor.
-
-#. Look for the xubuntu-jumpbox-vxx.  You will use the xubuntu jumpbox for all the labs. (see below)
-
-.. image:: /_static/image001.png
-   :height: 500px
-
-#. You can click on **RDP** to RDP to the Xubuntu jumpbox or you can select the **CONSOLE** link and access the jumpbox via your browser.  **The CONSOLE link requires you turn off pop-up blockers.**
-
-.. image:: /_static/image002.png
-   :height: 300px
-
-
-**Connecting to ansible host.**
-
-#. SSH to ansible host
-
-   - ``Windows Users``: Launch putty and connect to ansible.
-   - ``Mac Users``: Open Terminal Emulator and type ``ssh root@10.1.1.150``.  If prompted, password is **password**.
-
-#. Change directory to access lab directory folder.
-
-   - type ``cd f5-ansible-workshop`` to change directory to location of the ansible lab.
-   - type ``pwd`` to confirm path is **/root/f5-ansible-workshop**.
-
 .. list-table::
     :widths: 20 40 40
     :header-rows: 1
@@ -68,3 +38,44 @@ Connect to lab
         - **External:** 10.1.10.252
         - **Internal:** 10.1.20.252
       - - ``root``/``default``
+
+Connect to lab
+~~~~~~~~~~~~~~
+
+**Access f5 training portal**
+
+#. Open a browser and go to student portal site as provided by instructor.
+
+**Connect to Jump server**
+
+#. Look for the xubuntu-jumpbox-vxx.  You will use the xubuntu jumpbox for all the labs. (see below)
+
+   .. image:: /_static/image001.png
+      :height: 500px
+
+#. You can click on **RDP** to RDP to the Xubuntu jumpbox or you can select the **CONSOLE** link and access the jumpbox via your browser.  **The CONSOLE link requires you turn off pop-up blockers.**
+
+   .. image:: /_static/image002.png
+      :height: 300px
+
+**Connect to BIG-IP admin gui**
+
+#. From Jumpbox, open BIG-IP Admin GUI
+
+   - Open Chrome browser found on launchpad at bottom of screen
+   - Click on ``bigip01`` on favorites bar
+   - Login with username: ``admin`` and password: ``admin``
+
+**Connecting to ansible host.**
+
+#. From Jumpbox, SSH to Ansible host
+
+   - Open Terminal Emulator Window found on launchpad at bottom of screen
+   - Type ``ssh root@10.1.1.150``
+   - Type ``yes`` when asked "Are you sure..."
+   - If prompted, password is **password**
+
+#. Change directory to access lab directory folder
+
+   - type ``cd f5-ansible-workshop`` to change directory to location of the ansible lab.
+   - type ``pwd`` to confirm path is **/root/f5-ansible-workshop**.

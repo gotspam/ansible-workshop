@@ -251,32 +251,6 @@
 <h2>1.1. Lab Topology<a class="headerlink" href="#lab-topology" title="Permalink to this headline">¶</a></h2>
 <p>Each student will have a BIG-IP VE environment with IP addressing as below:</p>
 <img alt="_images/image000.png" src="_images/image000.png" />
-</div>
-<div class="section" id="connect-to-lab">
-<h2>1.2. Connect to lab<a class="headerlink" href="#connect-to-lab" title="Permalink to this headline">¶</a></h2>
-<p><strong>Accessing the lab environment.</strong></p>
-<ol class="arabic simple">
-<li>Open a browser and go to student portal site as provided by instructor.</li>
-<li>Look for the xubuntu-jumpbox-vxx.  You will use the xubuntu jumpbox for all the labs. (see below)</li>
-</ol>
-<a class="reference internal image-reference" href="_images/image001.png"><img alt="_images/image001.png" src="_images/image001.png" style="height: 500px;" /></a>
-<ol class="arabic simple">
-<li>You can click on <strong>RDP</strong> to RDP to the Xubuntu jumpbox or you can select the <strong>CONSOLE</strong> link and access the jumpbox via your browser.  <strong>The CONSOLE link requires you turn off pop-up blockers.</strong></li>
-</ol>
-<a class="reference internal image-reference" href="_images/image002.png"><img alt="_images/image002.png" src="_images/image002.png" style="height: 300px;" /></a>
-<p><strong>Connecting to ansible host.</strong></p>
-<ol class="arabic simple">
-<li>SSH to ansible host<ul>
-<li><code class="docutils literal"><span class="pre">Windows</span> <span class="pre">Users</span></code>: Launch putty and connect to ansible.</li>
-<li><code class="docutils literal"><span class="pre">Mac</span> <span class="pre">Users</span></code>: Open Terminal Emulator and type <code class="docutils literal"><span class="pre">ssh</span> <span class="pre">root&#64;10.1.1.150</span></code>.  If prompted, password is <strong>password</strong>.</li>
-</ul>
-</li>
-<li>Change directory to access lab directory folder.<ul>
-<li>type <code class="docutils literal"><span class="pre">cd</span> <span class="pre">f5-ansible-workshop</span></code> to change directory to location of the ansible lab.</li>
-<li>type <code class="docutils literal"><span class="pre">pwd</span></code> to confirm path is <strong>/root/f5-ansible-workshop</strong>.</li>
-</ul>
-</li>
-</ol>
 <table border="1" class="colwidths-given docutils">
 <colgroup>
 <col width="20%" />
@@ -340,6 +314,46 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="connect-to-lab">
+<h2>1.2. Connect to lab<a class="headerlink" href="#connect-to-lab" title="Permalink to this headline">¶</a></h2>
+<p><strong>Access f5 training portal</strong></p>
+<ol class="arabic simple">
+<li>Open a browser and go to student portal site as provided by instructor.</li>
+</ol>
+<p><strong>Connect to Jump server</strong></p>
+<ol class="arabic">
+<li><p class="first">Look for the xubuntu-jumpbox-vxx.  You will use the xubuntu jumpbox for all the labs. (see below)</p>
+<a class="reference internal image-reference" href="_images/image001.png"><img alt="_images/image001.png" src="_images/image001.png" style="height: 500px;" /></a>
+</li>
+<li><p class="first">You can click on <strong>RDP</strong> to RDP to the Xubuntu jumpbox or you can select the <strong>CONSOLE</strong> link and access the jumpbox via your browser.  <strong>The CONSOLE link requires you turn off pop-up blockers.</strong></p>
+<a class="reference internal image-reference" href="_images/image002.png"><img alt="_images/image002.png" src="_images/image002.png" style="height: 300px;" /></a>
+</li>
+</ol>
+<p><strong>Connect to BIG-IP admin gui</strong></p>
+<ol class="arabic simple">
+<li>From Jumpbox, open BIG-IP Admin GUI<ul>
+<li>Open Chrome browser found on launchpad at bottom of screen</li>
+<li>Click on <code class="docutils literal"><span class="pre">bigip01</span></code> on favorites bar</li>
+<li>Login with username: <code class="docutils literal"><span class="pre">admin</span></code> and password: <code class="docutils literal"><span class="pre">admin</span></code></li>
+</ul>
+</li>
+</ol>
+<p><strong>Connecting to ansible host.</strong></p>
+<ol class="arabic simple">
+<li>From Jumpbox, SSH to Ansible host<ul>
+<li>Open Terminal Emulator Window found on launchpad at bottom of screen</li>
+<li>Type <code class="docutils literal"><span class="pre">ssh</span> <span class="pre">root&#64;10.1.1.150</span></code></li>
+<li>Type <code class="docutils literal"><span class="pre">yes</span></code> when asked “Are you sure…”</li>
+<li>If prompted, password is <strong>password</strong></li>
+</ul>
+</li>
+<li>Change directory to access lab directory folder<ul>
+<li>type <code class="docutils literal"><span class="pre">cd</span> <span class="pre">f5-ansible-workshop</span></code> to change directory to location of the ansible lab.</li>
+<li>type <code class="docutils literal"><span class="pre">pwd</span></code> to confirm path is <strong>/root/f5-ansible-workshop</strong>.</li>
+</ul>
+</li>
+</ol>
 </div>
 </div>
 

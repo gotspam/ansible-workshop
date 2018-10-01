@@ -43,6 +43,17 @@ Use the ``-e``, or ``--extra-vars`` argument of ``ansible-playbook``
 
    - Type ``ansible-playbook playbooks/offline.yaml -e @creds.yaml --ask-vault-pass -e pool="hack11_pl" -e pmhost="10.1.20.17" -e pmport="80"``
 
+   You will be prompted for a password before executing the playbook.  Password is **password**.
+   If successful, you should see config for virtual servers, pools and nodes.
+
+   .. NOTE::
+
+    ``ansible-vault`` is used to store passwords and other sensitive info for use by ansible playbooks.
+
+    Type ``cat creds.yaml`` to confirm vault file is encrypted.
+    Type ``ansible-vault view creds.yaml`` to view the vault file.
+    Type ``ansible-vault edit creds.yaml`` to modify the vault file.
+    
 #. Verify if pool member 10.1.20.17 is ``forced offline``
 
    - Select **Local Traffic -> Pools -> Pool List -> hack11_pl -> Members**

@@ -30,6 +30,10 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
         nd_ip1: "10.1.20.17"
         nd_ip2: "10.1.20.20"
         state: "present"
+        username: admin
+        password: admin
+        server: 10.1.1.245
+        valid_certs: no
 
       environment: "{{ bigip_env }}"
 
@@ -46,6 +50,10 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
               - "http"
               - "analytics"
             state: "{{ state }}"
+            password: "{{ password }}"
+            server: "{{ server }}"
+            user: "{{ username }}"
+            validate_certs: "{{ valid_certs }}"
 
         - name: Adjust a pool
           bigip_pool:
@@ -53,12 +61,20 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
             monitors: "{{ pl_monitor }}"
             lb_method: "{{ pl_lb }}"
             state: "{{ state }}"
+            password: "{{ password }}"
+            server: "{{ server }}"
+            user: "{{ username }}"
+            validate_certs: "{{ valid_certs }}"
 
         - name: Add nodes
           bigip_node:
             name: "{{ item.name }}"
             host: "{{ item.host }}"
             state: "{{ state }}"
+            password: "{{ password }}"
+            server: "{{ server }}"
+            user: "{{ username }}"
+            validate_certs: "{{ valid_certs }}"
           loop:
             - { name: "{{ nd_ip1 }}", host: "{{ nd_ip1 }}" }
             - { name: "{{ nd_ip2 }}", host: "{{ nd_ip2 }}" }
@@ -69,6 +85,10 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
             port: "{{ nd_port }}"
             pool: "{{ pl_name }}"
             state: "{{ state }}"
+            password: "{{ password }}"
+            server: "{{ server }}"
+            user: "{{ username }}"
+            validate_certs: "{{ valid_certs }}"
           loop:
             - { host: "{{ nd_ip1 }}" }
             - { host: "{{ nd_ip2 }}" }
@@ -79,25 +99,17 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
             name: "{{ vs_name }}"
             pool: "{{ pl_name }}"
             state: "{{ state }}"
+            password: "{{ password }}"
+            server: "{{ server }}"
+            user: "{{ username }}"
+            validate_certs: "{{ valid_certs }}"
           when: state == "present"
 
    - Ctrl x to save file.
 
 #. Run this playbook.
 
-   - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/hack11.yaml``
-
-   You will be prompted for a password before executing the playbook.  Password is **password**.
-   If successful, you should see config for virtual servers, pools and nodes.
-
-   .. NOTE::
-
-    ``ansible-vault`` is used to store passwords and other sensitive info for use by ansible playbooks.
-
-    Type ``cat creds.yaml`` to confirm vault file is encrypted.
-    Type ``ansible-vault view creds.yaml`` to view the vault file.
-    Type ``ansible-vault edit creds.yaml`` to modify the vault file.
-
+   - Type ``ansible-playbook playbooks/hack11.yaml``
 
 #. Verify results in BIG-IP GUI.
 

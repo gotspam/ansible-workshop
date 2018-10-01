@@ -5,10 +5,10 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
 **Create consolidated playbook**
 
-#. Create a playbook ``app.yaml``.
+#. Create a playbook ``seedapp.yaml``.
 
-   - Type ``nano playbooks/app.yaml``
-   - Type the following into the ``playbooks/app.yaml`` file.
+   - Type ``nano playbooks/seedapp.yaml``
+   - Type the following into the ``playbooks/seedapp.yaml`` file.
 
    .. code::
 
@@ -23,7 +23,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
       vars:
         state: "present"
-        seed: "appseedinfo.yaml"
+        seed: "seed1.yaml"
 
       environment: "{{ bigip_env }}"
 
@@ -44,9 +44,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
         - name: Adjust a pool
           bigip_pool:
             name: "{{ pl_name }}"
-            monitors: "/Common/http"
-            monitor_type: "and_list"
-            slow_ramp_time: "120"
+            monitors: "{{ pl_monitor }}"
             lb_method: "{{ pl_lb }}"
             state: "{{ state }}"
 
@@ -81,7 +79,7 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
 #. Run this playbook.
 
-   - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/app.yaml``
+   - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/seedapp.yaml``
 
 #. Verify results in BIG-IP GUI and browse to app.
 
@@ -91,10 +89,10 @@ You will create a consolidated playbook to deploy VS, Pools and associated Membe
 
 #. Run this playbook to teardown app.
 
-   - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/app.yaml -e state="absent"``
+   - Type ``ansible-playbook -e @creds.yaml --ask-vault-pass playbooks/seedapp.yaml -e state="absent"``
 
 #. Verify that www12, pool and nodes should be deleted in BIG-IP GUI.
 
 .. NOTE::
 
-  This playbook leverages a config seed file in vars/appseedinfo.yaml.  Simply modify this file to deploy a new service.
+  This playbook leverages a config seed file in vars/seed1.yaml.  Create a new file vars/seed2.yaml to deploy a new service.

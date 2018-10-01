@@ -76,14 +76,15 @@ For this lab, the ansible inventory file is ``inventory/hosts``.
 
 #. Verify results by browsing to websites.
 
-   - Type ``curl http://10.1.20.15 --silent | grep SERVER_NAME`` and ``curl http://10.1.20.16 --silent | grep SERVER_NAME``
+   - Type ``curl http://10.1.20.15 --silent | grep SERVER_NAME``
+   - Type ``curl http://10.1.20.16 --silent | grep SERVER_NAME``
 
    .. image:: /_static/image011a.png
        :height: 80px
 
    .. NOTE::
 
-     The ``hosts: webservers`` referenced are defined in the ``inventory/hosts``
+     The ``hosts: webservers`` referenced in the playbook are defined in the ``inventory/hosts``
      file.  These webservers are on an internal vlan and not typically accessible by external
      users.  Upon successful deployment of the applications, app owners typically submit request for NetOps to configure app services
      such as dns, load balancing and firewall, before these applications can be accessed externally.
